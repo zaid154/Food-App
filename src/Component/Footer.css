@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding: 0;
+}
+
+.parent {
+  background: #45a2d7;
+  height: 50vh;
+  padding: 25px 50px;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.home_footer {
+  /* padding: 20px; */
+  width: 35%;
+  /* margin: 10px; */
+  /* background-color: blue; */
+  /* display: flex; */
+  /* align-items: center; */
+  gap: 10px;
+}
+
+.pages_footer {
+  width: 12%;
+  /* background-color: rgb(18, 205, 58); */
+  display: flex;
+  flex-direction: column;
+  display: "flex";
+  /* justify-content: center; */
+  align-items: center;
+  color: #dddddd;
+  gap: 20px;
+}
+
+.service_footer {
+  width: 15%;
+  /* background-color: rgb(218, 26, 236); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #dddddd;
+  gap: 20px;
+}
+
+.map_location {
+  width: 30%;
+  /* background-color: rgb(30, 175, 191); */
+  /* display: flex; */
+  justify-content: center;
+  padding-left: 10px;
+}
+
+.home_footer img {
+  height: 50px;
+  width: 50px;
+}
+.logo_row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* justify-content: center; */
+  align-content: center;
+  /* background: palegoldenrod; */
+}
+
+.logo_row p {
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.home_footer p {
+  margin-top: 20px;
+  line-height: 1.3;
+  font-size: 14.5px;
+  font-family: "Inter", sans-serif;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.lodo_so {
+  display: flex;
+  gap: 10px;
+}
+
+.lodo_so img {
+  margin-top: 20px;
+  height: 35px;
+  width: 35px;
+  border-radius: 10px;
+}
