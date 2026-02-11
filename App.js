@@ -14,7 +14,6 @@ let App = () => {
     <>
       <Header />
       <Card/>
-
       <Footer/>
 
     </>

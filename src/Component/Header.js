@@ -21,7 +21,7 @@ const Header = () => {
             <option value="">Select category</option>
             <option value="veg">Veg</option>
             <option value="non-veg">Non-Veg</option>
-            <option value="sweet">Sweet</option>
+            <option value="sweet">Vegan</option>
           </select>
 
           <li className="home">Home</li>
