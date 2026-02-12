@@ -126,7 +126,7 @@
 }
 
 #search_bar {
-  width: 700px;
+  width: 600px;
   height: 40px;
   border-radius: 7px;
   border: 1px solid black;
@@ -154,18 +154,76 @@
   /* margin-top: 5px; */
 }
 
-.top-rated {
+.topbtn {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.topbtn button {
   color: white;
-  background: #37f630;
   height: 40px;
-  width: 120px;
+  width: 150px;
   font-size: 16px;
   border-radius: 7px;
+  border: none;
+}
+.topbtn button:hover {
+  transform: scale(1.05);
+}
+.top_rated {
+  background: #37f630;
+}
+.top_price {
+  background: #ff6f61;
+}
+
+li {
+  font-size: 15px;
+}
+
+.shimmer {
   display: flex;
-  align-content: center;
-  justify-content: center;
-  align-content: center;
+  flex-direction: column;
   align-items: center;
-  margin-left: 50%;
-  margin-top: 20px;
+  justify-content: flex-start;
+  width: 18%;
+  height: 400px;
+  background: #f0f0f0;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.shimmer_img {
+  width: 200px;
+  height: 200px;
+  background: #ddd;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.shimmer_titt {
+  width: 200px;
+  height: 20px;
+  background: #ddd;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.shimmer_dec {
+  width: 200px;
+  height: 60px;
+  background: #ddd;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.shimmer_pic_ra,
+.shimmer_cart {
+  width: 200px;
+  height: 30px;
+  background: #ddd;
+  margin: 10px auto;
+  border-radius: 5px;
 }
