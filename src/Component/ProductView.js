@@ -7,9 +7,7 @@ const ProductView=()=>{
         const fetchdata=async()=>{
             const data=await fetch("https://dummyjson.com/recipes");
             const jsondata=await data.json();
-            // console.log(jsondata.recipes);
             const productdetail=jsondata.recipes.find(data=>data.id==id);
-            // console.log("pro-de",productdetail);
             setproduct(productdetail)
         }
         fetchdata();
