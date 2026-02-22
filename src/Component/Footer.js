@@ -1,6 +1,6 @@
 import React from "react";
-import "../Component/Footer.css";
 import { LOGO } from "../utils/Constants";
+
 
 const Footer = () => {
   return (

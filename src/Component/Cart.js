@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import product from "../utils/Product";
 import Shimmer from "./shimmer";
+import { Link } from "react-router-dom";
 
 const CardHandler = ({ data }) => {
-  // console.log(data);
-
   return (
     <div className="cart">
       <div
@@ -39,14 +37,22 @@ const CardHandler = ({ data }) => {
 const Card = () => {
   const [products, setProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [inputdata, setinputdata] = useState("");
+  const [finalproducts, setfinalproducts]=useState([])
+  
+  function inputfunction(e) {
+    setinputdata(e);
+    console.log(e);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch("https://dummyjson.com/recipes");
       const jsondata = await data.json();
-
+      
       setProducts(jsondata.recipes);
       setAllProducts(jsondata.recipes);
+      setfinalproducts(jsondata.recipes);
     };
 
     fetchData();
@@ -66,25 +72,41 @@ const Card = () => {
     setProducts(filterProducts);
   }
 
+  function clickfunction() {
+    const filterData = finalproducts.filter((card) => {
+      return card.name.toLowerCase().includes(inputdata.toLowerCase());
+    });
+    setProducts(filterData);
+  }
   return (
     <>
+      <div className="topbtn">
+        <button className="top_rated" onClick={topRatedFood}>
+          Top Rated Food
+        </button>
+
+        <button className="top_price" onClick={priceFood}>
+          Price Rated Food
+        </button>
+      </div>
+<div className="searchdiv">
+      <input
+        type="text"
+        placeholder=" Search Here"
+        id="search_bar"
+        value={inputdata}
+        onChange={(e) => inputfunction(e.target.value)}
+      />
+
+      <button onClick={clickfunction} className="serbtn">Search</button>
+</div>
       {products.length === 0 ? (
         <Shimmer />
       ) : (
         <>
-          <div className="topbtn">
-            <button className="top_rated" onClick={topRatedFood}>
-              Top Rated Food
-            </button>
-
-            <button className="top_price" onClick={priceFood}>
-              Price Rated Food
-            </button>
-          </div>
-
           <div className="cart-list">
             {products.map((item) => (
-              <CardHandler data={item} key={item.id} />
+             <Link to={`restaurant/${item.id}`} key={item.id} ><CardHandler data={item}  /></Link> 
             ))}
           </div>
         </>
