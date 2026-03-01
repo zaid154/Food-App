@@ -28,9 +28,9 @@ const Header = () => {
       <div className="list">
         <ul>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
-          <li><Link to="/cart">Cart</Link></li>
+          <li><Link to="/About">About Us</Link></li>
+          <li><Link to="/Contact">Contact Us</Link></li>
+          <li><Link to="/Cart">Cart</Link></li>
           <li className="log_in" onClick={btnchange}>
             {loginbtn}
           </li>
