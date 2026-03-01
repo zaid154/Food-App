@@ -27,10 +27,10 @@ const Header = () => {
 
       <div className="list">
         <ul>
-          <li className="home"><Link to="./">Home</Link></li>
-          <li className="about_us"><Link to="./About">About Us</Link></li>
-          <li className="Contact_us"><Link to="./Contact">Contact Us</Link></li>
-          <li className="Cart_con"><Link to="./Cart">Cart</Link></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About Us</Link></li>
+          <li><Link to="/contact">Contact Us</Link></li>
+          <li><Link to="/cart">Cart</Link></li>
           <li className="log_in" onClick={btnchange}>
             {loginbtn}
           </li>
