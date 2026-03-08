@@ -4,21 +4,43 @@ class Contact extends React.Component {
 
     constructor(props){
         super(props)
-        // console.log(this.props);
         this.state={
-            count:0
+            data:{}
         }
         
     }
 
+    componentDidMount(){
+        const apiData=async()=>{
+            const feachData = await fetch("https://api.github.com/users/zaid154");
+            const jsonData=await feachData.json()
+            this.setState({data : jsonData})
+            // console.log(jsonData);
+            
+        }
+        let a=0;
+        this.zaid=setInterval(()=>{
+            console.log(a++);
+        },1000)
+        apiData()
+    }
+    componentWillUnmount(){
+        clearInterval(this.zaid)
+    };
+
     render() {
+        const {add}=this.props
+        const {avatar_url,name,created_at}=this.state.data
         return (
+            <>
+            <h1></h1>
             <div className="user-profile">
-                <h1>Name : {this.props.name}</h1>
-                <h3>Add : {this.props.add}</h3>
-                <h3>Add : {this.state.count}</h3>
-                <button onClick={()=>this.setState({count:this.state.count+1    })}>clicl</button>
+                <img src={avatar_url}></img>
+                <h1>Name : {name}</h1>
+                <h1>created_at : {created_at}</h1>
+
             </div>
+            </>
         )
     }
 }
