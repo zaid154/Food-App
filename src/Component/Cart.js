@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
+import useResipe from "./useRecipes"
 
 const CardHandler = ({ data }) => {
   return (
@@ -38,25 +39,20 @@ const Card = () => {
   const [products, setProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [inputdata, setinputdata] = useState("");
-  const [finalproducts, setfinalproducts]=useState([])
-  
+  const [finalproducts, setfinalproducts] = useState([])
+  const jsondata = useResipe()
+
   function inputfunction(e) {
     setinputdata(e);
     console.log(e);
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch("https://dummyjson.com/recipes");
-      const jsondata = await data.json();
-      
-      setProducts(jsondata.recipes);
-      setAllProducts(jsondata.recipes);
-      setfinalproducts(jsondata.recipes);
-    };
-
-    fetchData();
-  }, []);
+    if (jsondata && jsondata.recipes) {
+      setProducts(jsondata.recipes)
+      setAllProducts(jsondata.recipes)
+    }
+  }, [jsondata])
 
   function topRatedFood() {
     const filterProducts = allProducts.filter(
@@ -89,24 +85,24 @@ const Card = () => {
           Price Rated Food
         </button>
       </div>
-<div className="searchdiv">
-      <input
-        type="text"
-        placeholder=" Search Here"
-        id="search_bar"
-        value={inputdata}
-        onChange={(e) => inputfunction(e.target.value)}
-      />
+      <div className="searchdiv">
+        <input
+          type="text"
+          placeholder=" Search Here"
+          id="search_bar"
+          value={inputdata}
+          onChange={(e) => inputfunction(e.target.value)}
+        />
 
-      <button onClick={clickfunction} className="serbtn">Search</button>
-</div>
+        <button onClick={clickfunction} className="serbtn">Search</button>
+      </div>
       {products.length === 0 ? (
         <Shimmer />
       ) : (
         <>
           <div className="cart-list">
             {products.map((item) => (
-             <Link to={`restaurant/${item.id}`} key={item.id} ><CardHandler data={item}  /></Link> 
+              <Link to={`restaurant/${item.id}`} key={item.id} ><CardHandler data={item} /></Link>
             ))}
           </div>
         </>
