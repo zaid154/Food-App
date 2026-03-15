@@ -30,6 +30,7 @@ const Header = () => {
         <ul>
           <li><Link to="/">Is online {status ? "🟢" : "🔴"}</Link></li>
           <li><Link to="/">Home</Link></li>
+          <li><Link to="/grocery">Grocery</Link></li>
           <li><Link to="/About">About Us</Link></li>
           <li><Link to="/Contact">Contact Us</Link></li>
           <li><Link to="/Cart">Cart</Link></li>

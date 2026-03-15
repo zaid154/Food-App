@@ -43,12 +43,16 @@ const Card = () => {
 
   function inputfunction(e) {
     setinputdata(e);
+    console.log(e);
+    
   }
 
   useEffect(() => {
     if (jsondata && jsondata.recipes) {
       setProducts(jsondata.recipes);
       setfinalproducts(jsondata.recipes);
+      console.log("cat ker data lod");
+      
     }
   }, [jsondata]);
 
