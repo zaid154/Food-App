@@ -19,7 +19,6 @@ const CardHandler = ({ data }) => {
       <div className="res-detail">
         <h5 style={{ marginBottom: "10px", fontSize: "18px" }}>{data.name}</h5>
         <p style={{ fontWeight: "900", fontSize: "14px" }}>Ingredients</p>
-
         <p className="dec">{data.ingredients}</p>
 
         <div className="price_rating" style={{ marginTop: "15px" }}>
@@ -35,35 +34,34 @@ const CardHandler = ({ data }) => {
     </div>
   );
 };
+
 const Card = () => {
   const [products, setProducts] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
+  const [finalproducts, setfinalproducts] = useState([]);
   const [inputdata, setinputdata] = useState("");
-  const [finalproducts, setfinalproducts] = useState([])
-  const jsondata = useResipe()
+  const jsondata = useResipe();
 
   function inputfunction(e) {
     setinputdata(e);
-    console.log(e);
   }
 
   useEffect(() => {
     if (jsondata && jsondata.recipes) {
-      setProducts(jsondata.recipes)
-      setAllProducts(jsondata.recipes)
+      setProducts(jsondata.recipes);
+      setfinalproducts(jsondata.recipes);
     }
-  }, [jsondata])
+  }, [jsondata]);
 
   function topRatedFood() {
-    const filterProducts = allProducts.filter(
-      (product) => product.rating >= 4.7,
+    const filterProducts = finalproducts.filter(
+      (product) => product.rating >= 4.7
     );
     setProducts(filterProducts);
   }
 
   function priceFood() {
-    const filterProducts = allProducts.filter(
-      (product) => product.caloriesPerServing >= 500,
+    const filterProducts = finalproducts.filter(
+      (product) => product.caloriesPerServing >= 500
     );
     setProducts(filterProducts);
   }
@@ -74,17 +72,18 @@ const Card = () => {
     });
     setProducts(filterData);
   }
+
   return (
     <>
       <div className="topbtn">
         <button className="top_rated" onClick={topRatedFood}>
           Top Rated Food
         </button>
-
         <button className="top_price" onClick={priceFood}>
           Price Rated Food
         </button>
       </div>
+
       <div className="searchdiv">
         <input
           type="text"
@@ -93,19 +92,21 @@ const Card = () => {
           value={inputdata}
           onChange={(e) => inputfunction(e.target.value)}
         />
-
-        <button onClick={clickfunction} className="serbtn">Search</button>
+        <button onClick={clickfunction} className="serbtn">
+          Search
+        </button>
       </div>
+
       {products.length === 0 ? (
         <Shimmer />
       ) : (
-        <>
-          <div className="cart-list">
-            {products.map((item) => (
-              <Link to={`restaurant/${item.id}`} key={item.id} ><CardHandler data={item} /></Link>
-            ))}
-          </div>
-        </>
+        <div className="cart-list">
+          {products.map((item) => (
+            <Link to={`restaurant/${item.id}`} key={item.id}>
+              <CardHandler data={item} />
+            </Link>
+          ))}
+        </div>
       )}
     </>
   );
