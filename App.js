@@ -11,6 +11,7 @@ import Order_Cart from "./src/Component/Order_Cart.js";
 import Error from "./src/Component/Error.js";
 import ProductView from "./src/Component/ProductView.js";
 import { lazy } from "react";
+import Shimmer from "./src/Component/shimmer.js";
 const Grocery = lazy(()=>import('./src/Component/Grocery.js'))
 
 let App = () => {
@@ -54,7 +55,7 @@ const appRuter = createBrowserRouter([
       },
       {
         path:"/grocery",
-        element:<Suspense><Grocery/></Suspense>
+        element:<Suspense fallback={<Shimmer/>}><Grocery/></Suspense>
       } 
     ]
   }

@@ -5,35 +5,44 @@ import useResipe from "./useRecipes"
 
 const CardHandler = ({ data }) => {
   return (
-    <div className="cart">
-      <div
-        className="cart-img"
-        style={{
-          backgroundImage: `url(${data.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          position: "relative",
-        }}
-      ></div>
+    <div className="flex flex-col m-3 p-3 border rounded-lg w-60 shadow-lg h-[450px]">
 
-      <div className="res-detail">
-        <h5 style={{ marginBottom: "10px", fontSize: "18px" }}>{data.name}</h5>
-        <p style={{ fontWeight: "900", fontSize: "14px" }}>Ingredients</p>
-        <p className="dec">{data.ingredients}</p>
+      <img
+        src={data.image}
+        alt={data.name}
+        className="w-full h-52 object-cover rounded"
+      />
 
-        <div className="price_rating" style={{ marginTop: "15px" }}>
+      <div className="res-detail flex flex-col flex-grow">
+
+        <h5 className="text-lg font-semibold mt-2">{data.name}</h5>
+
+        <p className="font-bold text-sm mt-1">Ingredients</p>
+        <p class="text-[14px] text-[#555] mb-3 whitespace-nowrap overflow-hidden text-ellipsis">
+          {data.ingredients}
+        </p>
+
+        <div className="flex justify-between ">
           <span>₹{data.caloriesPerServing}</span>
           <span>{data.rating} ⭐</span>
         </div>
 
-        <div className="btn_box">
-          <button id="add_cart">Add to cart</button>
-          <button id="buy_now">Buy now</button>
+        <div className="flex gap-4 mt-auto">
+          <button className="bg-pink-400 rounded w-full">
+            Add to cart
+          </button>
+
+          <button className="bg-green-500 rounded w-full">
+            Buy now
+          </button>
         </div>
+
       </div>
     </div>
   );
 };
+
+
 
 const Card = () => {
   const [products, setProducts] = useState([]);
@@ -44,7 +53,7 @@ const Card = () => {
   function inputfunction(e) {
     setinputdata(e);
     console.log(e);
-    
+
   }
 
   useEffect(() => {
@@ -52,7 +61,7 @@ const Card = () => {
       setProducts(jsondata.recipes);
       setfinalproducts(jsondata.recipes);
       console.log("cat ker data lod");
-      
+
     }
   }, [jsondata]);
 
@@ -104,7 +113,7 @@ const Card = () => {
       {products.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="cart-list">
+        <div className="grid grid-cols-5 gap-6">
           {products.map((item) => (
             <Link to={`restaurant/${item.id}`} key={item.id}>
               <CardHandler data={item} />

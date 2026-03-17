@@ -17,8 +17,8 @@ const Header = () => {
   };
 
   return (
-    <div className="header">
-      <div className="logo">
+    <div className="flex justify-between m-1 p-2 border-2">
+      <div className="logo w-15">
         <img
           src={LOGO}
           alt="logo"
@@ -26,8 +26,8 @@ const Header = () => {
         />
       </div>
 
-      <div className="list">
-        <ul>
+      <div className="flex gap-1 p-4 list-none font-bold items-center justify-center">
+        <ul className="flex space-x-9">
           <li><Link to="/">Is online {status ? "🟢" : "🔴"}</Link></li>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/grocery">Grocery</Link></li>
