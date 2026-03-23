@@ -5,30 +5,30 @@ import useResipe from "./useRecipes"
 
 const CardHandler = ({ data }) => {
   return (
-    <div className="flex flex-col m-3 p-3 border rounded-lg w-60 shadow-lg h-[450px]">
+    <div className="flex flex-col m-2 p-3 border rounded w-60 h-[450px]">
 
       <img
         src={data.image}
         alt={data.name}
-        className="w-full h-52 object-cover rounded"
+        className="object-cover rounded"
       />
 
       <div className="res-detail flex flex-col flex-grow">
 
-        <h5 className="text-lg font-semibold mt-2">{data.name}</h5>
+        <p className="text-[16px] font-bold mt-2">{data.name}</p>
 
-        <p className="font-bold text-sm mt-1">Ingredients</p>
-        <p class="text-[14px] text-[#555] mb-3 whitespace-nowrap overflow-hidden text-ellipsis">
-          {data.ingredients}
+        <p className="font-bold text-md mt-1 text-[#555] text-center">Ingredients</p>
+        <p className="text-[13px] text-[#555] mb-3 line-clamp-3">
+          {data.ingredients.join(", ")}
         </p>
 
-        <div className="flex justify-between ">
+        <div className="flex justify-between align-items-center mt-auto mb-2">
           <span>₹{data.caloriesPerServing}</span>
           <span>{data.rating} ⭐</span>
         </div>
 
         <div className="flex gap-4 mt-auto">
-          <button className="bg-pink-400 rounded w-full">
+          <button className="bg-pink-400 rounded w-full ">
             Add to cart
           </button>
 

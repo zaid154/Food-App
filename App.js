@@ -2,8 +2,9 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./App.css";
 import Header from "./src/Component/Header";
-import Card from "./src/Component/Cart";
+import Cart from "./src/Component/Cart";
 import Footer from "./src/Component/Footer.js"
+import  Cartwithdifficulty from "./src/Component/Cartwithdifficulty.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./src/Component/About.js";
 import Contact from "./src/Component/Contact.js";
@@ -19,7 +20,7 @@ let App = () => {
     <>
       <Header />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
@@ -32,7 +33,7 @@ const appRuter = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Card/>
+        element:<Cartwithdifficulty Cart={Cart}/>
       },
       {
         path: "/about",
