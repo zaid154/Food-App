@@ -1,8 +1,8 @@
 const Cartwithdifficulty=({Cart})=>{
     return(
         <>
-        {/* <label><Cart/></label> */}
-        <Cart/>
+        <label><Cart/></label>
+        
         </>
     )
 }

@@ -33,7 +33,7 @@ const appRuter = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Cartwithdifficulty Cart={Cart}/>
+        element:<Cartwithdifficulty Cart={Cart} difficulty={Cartwithdifficulty.Cart}/>
       },
       {
         path: "/about",

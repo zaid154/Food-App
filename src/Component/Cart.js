@@ -17,8 +17,8 @@ const CardHandler = ({ data }) => {
 
         <p className="text-[16px] font-bold mt-2">{data.name}</p>
 
-        <p className="font-bold text-md mt-1 text-[#555] text-center">Ingredients</p>
-        <p className="text-[13px] text-[#555] mb-3 line-clamp-3">
+        <p className="font-bold text-md mt-1  text-center">Ingredients</p>
+        <p className="text-[13px]  mb-3 line-clamp-3">
           {data.ingredients.join(", ")}
         </p>
 
@@ -88,24 +88,26 @@ const Card = () => {
 
   return (
     <>
-      <div className="topbtn">
-        <button className="top_rated" onClick={topRatedFood}>
+      <div className="flex gap-4 m-4 justify-center space-x-4">
+        <button className="bg-green-500 text-white h-10 px-4 rounded" onClick={topRatedFood}>
           Top Rated Food
         </button>
-        <button className="top_price" onClick={priceFood}>
+        <button className="bg-blue-500 text-white h-10 px-4 rounded" onClick={priceFood}>
           Price Rated Food
         </button>
+
       </div>
 
-      <div className="searchdiv">
+      <div className=" h-10 m-4 flex items-center justify-center rounded">
         <input
+          className="h-8 w-220 px-4 rounded border border-gray-500"
           type="text"
           placeholder=" Search Here"
           id="search_bar"
           value={inputdata}
           onChange={(e) => inputfunction(e.target.value)}
         />
-        <button onClick={clickfunction} className="serbtn">
+        <button onClick={clickfunction} className="bg-red-500 text-white h-8 px-4 rounded ml-4">
           Search
         </button>
       </div>
