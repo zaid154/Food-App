@@ -39,8 +39,13 @@ const Header = () => {
           </li>
           <button onClick={() => {
             document.body.classList.toggle("dark");
-          }} className="bg-gray-700 text-white px-4 rounded-2xl h-5.5 text-sm ">
+          }} className="bg-gray-700 text-white px-4 rounded-2xl h-5 text-sm ">
             Dark Mode
+          </button>
+          <button onClick={() => {
+            document.body.classList.toggle("red");
+          }} className="bg-gray-700 text-white px-4 rounded-2xl h-5 text-sm ">
+            Red Mode
           </button>
         </ul>
       </div>
