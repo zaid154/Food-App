@@ -9,3 +9,8 @@ body.red {
   background-color: red;
   color: white;
 }
+
+body{
+  overflow-x: hidden;
+
+}

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
-import useResipe from "./useRecipes"
+import useResipe from "./useRecipes";
+import Cartwithdifficulty from "./Cartwithdifficulty.js";
+
 
 const CardHandler = ({ data }) => {
   return (
-    <div className="flex flex-col m-2 p-3 border rounded w-60 h-[450px]">
+    <div className="flex flex-col m-0.5 p-2 border rounded w-58 h-[420]">
 
       <img
         src={data.image}
@@ -13,7 +15,7 @@ const CardHandler = ({ data }) => {
         className="object-cover rounded"
       />
 
-      <div className="res-detail flex flex-col flex-grow">
+      <div className="res-detail flex flex-col">
 
         <p className="text-[16px] font-bold mt-2">{data.name}</p>
 
@@ -42,7 +44,7 @@ const CardHandler = ({ data }) => {
   );
 };
 
-
+const CartwithdifficultyS = Cartwithdifficulty(CardHandler);
 
 const Card = () => {
   const [products, setProducts] = useState([]);
@@ -115,10 +117,10 @@ const Card = () => {
       {products.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="grid grid-cols-5 gap-6">
+        <div className="grid grid-cols-5 gap-3 relative px-2">
           {products.map((item) => (
             <Link to={`restaurant/${item.id}`} key={item.id}>
-              <CardHandler data={item} />
+              <CartwithdifficultyS data={item} />
             </Link>
           ))}
         </div>

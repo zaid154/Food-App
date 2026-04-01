@@ -4,7 +4,6 @@ import "./App.css";
 import Header from "./src/Component/Header";
 import Cart from "./src/Component/Cart";
 import Footer from "./src/Component/Footer.js"
-import  Cartwithdifficulty from "./src/Component/Cartwithdifficulty.js";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./src/Component/About.js";
 import Contact from "./src/Component/Contact.js";
@@ -13,7 +12,7 @@ import Error from "./src/Component/Error.js";
 import ProductView from "./src/Component/ProductView.js";
 import { lazy } from "react";
 import Shimmer from "./src/Component/shimmer.js";
-const Grocery = lazy(()=>import('./src/Component/Grocery.js'))
+const Grocery = lazy(() => import('./src/Component/Grocery.js'))
 
 let App = () => {
   return (
@@ -30,10 +29,10 @@ const appRuter = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <Error />,
-    children:[
+    children: [
       {
-        path:"/",
-        element:<Cartwithdifficulty Cart={Cart} difficulty={Cartwithdifficulty.Cart}/>
+        path: "/",
+        element: <Cart />
       },
       {
         path: "/about",
@@ -42,7 +41,7 @@ const appRuter = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact name={"zaid"}add={"uppp"}/>,
+        element: <Contact name={"zaid"} add={"uppp"} />,
         errorElement: <Error />
       },
       {
@@ -51,13 +50,13 @@ const appRuter = createBrowserRouter([
         errorElement: <Error />
       },
       {
-        path:"restaurant/:id?",
-        element:<ProductView/>
+        path: "restaurant/:id?",
+        element: <ProductView />
       },
       {
-        path:"/grocery",
-        element:<Suspense fallback={<Shimmer/>}><Grocery/></Suspense>
-      } 
+        path: "/grocery",
+        element: <Suspense fallback={<Shimmer />}><Grocery /></Suspense>
+      }
     ]
   }
 ]);
