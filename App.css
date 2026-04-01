@@ -4,13 +4,3 @@ body.dark {
   background-color: #302f2f;
   color: white;
 }
-
-body.red {
-  background-color: red;
-  color: white;
-}
-
-body{
-  overflow-x: hidden;
-
-}

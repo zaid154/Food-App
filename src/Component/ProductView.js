@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import InstructionsView from "./insructionView";
 
 
 
@@ -15,25 +16,23 @@ const ProductView = () => {
         }
         fetchdata();
     }, [id])
-    const [instruction1, setinstruction1] = useState(true)
-    // instruction1=()=>{
-    //     setinstruction1.className"displaynone"
-    // }
+    const [Instructions, setInstructions] = useState(false)
+
     if (product == null) {
         return true
     }
     return (
         <div className="flex bg-gray-100 m-2 p-4 rounded-xl">
             <img
-                className="h-[450px] rounded-3xl"
+                className="h-[400] rounded-3xl"
                 src={product?.image}
             />
             <div className="ml-6 flex flex-col gap-2">
                 <h1 className="text-2xl font-bold">
                     Name: {product?.name}
                 </h1>
-                <div className="flex flex-row gap-4">
-                    <p className="bg-amber-200 pl-2.5 pr-2.5 rounded-full">{product?.cookTimeMinutes} Mins</p>
+                <div className="flex flex-row gap-4 font-medium text-[12px]">
+                    <p className="bg-amber-200 pl-2.5 pr-2.5 rounded-full ">{product?.cookTimeMinutes} Mins</p>
                     <p className="bg-amber-200 pl-2.5 pr-2.5 rounded-full">{product?.rating} Rating</p>
                     <p className="bg-amber-200 pl-2.5 pr-2.5 rounded-full">{product?.caloriesPerServing} Calories Per Serving</p>
                     <p className="bg-amber-200 pl-2.5 pr-2.5 rounded-full">Cuisine: {product?.cuisine}</p>
@@ -43,7 +42,7 @@ const ProductView = () => {
                 <div>
                     <h3 className="font-bold mt-3 text-2xl">Ingredients:</h3>
 
-                    <div className="flex flex-wrap gap-2 mt-2">
+                    <div className="flex flex-wrap gap-2 mt-2 font-medium text-[12px]">
                         {product?.ingredients?.map((item, i) => (
                             <span
                                 key={i}
@@ -56,11 +55,13 @@ const ProductView = () => {
                 </div>
 
 
-                <h3 className="font-semibold mt-3">instructions:</h3>
+                <h3 className="font-semibold mt-3">Instructions:</h3>
                 <ul className="list-disc pl-5">
-                    {product?.instructions?.map((item, i) => (
-                        <li key={i}>{item}</li>
-                    ))}
+                    {/* {product?.instructions?.map((item, index) => (
+                        (index == 0) ? setInstructions(() => (!Instructions)) :
+                            <li className={Instructions ? "none" : "block"}>{item}</li>
+                    ))} */}
+                    <InstructionsView data={product?.instructions}/>
                 </ul>
 
 

@@ -7,7 +7,7 @@ import Cartwithdifficulty from "./Cartwithdifficulty.js";
 
 const CardHandler = ({ data }) => {
   return (
-    <div className="flex flex-col m-0.5 p-2 border rounded w-58 h-[420]">
+    <div className="flex flex-col m-0 p-2 border rounded w-55 h-[420]">
 
       <img
         src={data.image}
@@ -102,7 +102,7 @@ const Card = () => {
 
       <div className=" h-10 m-4 flex items-center justify-center rounded">
         <input
-          className="h-8 w-220 px-4 rounded border border-gray-500"
+          className="h-8 w-full max-w-xl px-4 rounded border border-gray-500"
           type="text"
           placeholder=" Search Here"
           id="search_bar"
@@ -130,3 +130,10 @@ const Card = () => {
 };
 
 export default Card;
+
+
+
+
+
+
+
