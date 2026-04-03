@@ -7,7 +7,6 @@ const Cartwithdifficulty = (Cart) => {
                 </label>
                 <Cart {...props} />
             </div>
-
         )
     }
     return Cartwithdifficultylabel;

@@ -6,7 +6,7 @@ function Shimmer() {
       {Array(10).fill("").map((_, index) => (
         <div
           key={index}
-          className="flex flex-col p-2 border rounded w-55 h-[420px] animate-pulse"
+          className="flex flex-col p-2 border rounded w-55 h-[420] animate-pulse"
         >
           {/* Image */}
           <div className="bg-gray-200 rounded w-full h-40"></div>

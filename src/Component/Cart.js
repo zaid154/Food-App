@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState , useContext } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import useResipe from "./useRecipes";
 import Cartwithdifficulty from "./Cartwithdifficulty";
 
+
 const CardHandler = ({ data }) => {
   return (
-    <div className="flex flex-col p-2 border rounded w-55 h-[420px]">
+    <div className="flex flex-col p-2 border rounded w-55 h-[420]">
 
       <img
         src={data.image}
@@ -54,7 +55,6 @@ const Card = () => {
   const [products, setProducts] = useState([]);
   const [finalProducts, setFinalProducts] = useState([]);
   const [inputData, setInputData] = useState("");
-
   const jsondata = useResipe();
 
   useEffect(() => {
