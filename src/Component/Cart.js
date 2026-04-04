@@ -1,5 +1,5 @@
-import { useEffect, useState , useContext } from "react";
-import Shimmer from "./shimmer";
+import { useEffect, useState, useContext } from "react";
+import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useResipe from "./useRecipes";
 import Cartwithdifficulty from "./Cartwithdifficulty";
@@ -126,7 +126,7 @@ const Card = () => {
       {products.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="grid grid-cols-5 gap-3 px-2">
+        <div className="flex flex-wrap  justify-center gap-4 px-2">
           {products.map((item) => (
             <Link
               to={`restaurant/${item.id}`}
