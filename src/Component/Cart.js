@@ -126,7 +126,7 @@ const Card = () => {
       {products.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="flex flex-wrap  justify-center gap-4 px-2">
+        <div className="flex flex-wrap justify-center gap-4 px-2">
           {products.map((item) => (
             <Link
               to={`restaurant/${item.id}`}
