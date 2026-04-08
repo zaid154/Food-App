@@ -16,7 +16,7 @@ const Grocery = () => {
 
             <div className="flex flex-wrap gap-4 justify-center">
                 {Grocery_data.products.map((Grocery_Cart) => {
-                    const des_words = Grocery_Cart.title.split(" ");
+                    const des_name = Grocery_Cart.title.split(" ");
                     return (
                         <div
                             className="flex flex-col pl-3 pr-3 pb-3 border rounded-lg w-[250px] h-auto shadow-md hover:shadow-xl transition"
@@ -32,8 +32,8 @@ const Grocery = () => {
 
                                 <div>
                                     <p className="font-bold mt-2 text-lg">
-                                        {des_words.slice(0, 3).join(" ")}
-                                        {des_words.length > 3 && "..."}
+                                        {des_name.slice(0, 3).join(" ")}
+                                        {des_name.length > 3 && "..."}
                                     </p>
 
                                     <p className="font-bold text-md mt-1 text-center">

@@ -6,6 +6,7 @@ import Cartwithdifficulty from "./Cartwithdifficulty";
 
 
 const CardHandler = ({ data }) => {
+  const des_namefood = data.name.split(" ");
   return (
     <div className="flex flex-col p-2 border rounded w-55 h-[420]">
 
@@ -17,8 +18,9 @@ const CardHandler = ({ data }) => {
 
       <div className="flex flex-col">
 
-        <p className="text-[16px] font-bold mt-2">
-          {data.name}
+        <p className="font-bold mt-2 text-lg">
+          {des_namefood.slice(0, 3).join(" ")}
+          {des_namefood.length > 3 && "..."}
         </p>
 
         <p className="font-bold text-md mt-1 text-center">
