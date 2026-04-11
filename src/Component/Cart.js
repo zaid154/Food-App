@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import UserContext from "./Usercontext"
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useResipe from "./useRecipes";
@@ -7,6 +8,8 @@ import Cartwithdifficulty from "./Cartwithdifficulty";
 
 const CardHandler = ({ data }) => {
   const des_namefood = data.name.split(" ");
+  const Usecontext=useContext(UserContext)
+  console.log("abcname",Usecontext.name);
   return (
     <div className="flex flex-col p-2 border rounded w-55 h-[420]">
 
@@ -18,10 +21,12 @@ const CardHandler = ({ data }) => {
 
       <div className="flex flex-col">
 
-        <p className="font-bold mt-2 text-lg">
+        <p className="font-bold mt-2 text-mid">
           {des_namefood.slice(0, 3).join(" ")}
           {des_namefood.length > 3 && "..."}
         </p>
+        
+        <p>{Usecontext.name}</p>
 
         <p className="font-bold text-md mt-1 text-center">
           Ingredients
@@ -87,6 +92,9 @@ const Card = () => {
     setProducts(filtered);
   };
 
+
+
+
   return (
     <>
       {/* Buttons */}
@@ -108,6 +116,7 @@ const Card = () => {
 
       {/* Search */}
       <div className="flex justify-center m-4">
+
         <input
           className="h-8 w-full max-w-xl px-4 border rounded"
           type="text"

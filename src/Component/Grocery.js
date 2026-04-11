@@ -1,12 +1,19 @@
 import Shimmer from "./Shimmer.js";
 import usegroceries from "./Usegroceries";
+import { useContext } from "react";
+import UserContext from "./Usercontext"
+
 
 const Grocery = () => {
     const Grocery_data = usegroceries();
+    const Usecontext = useContext(UserContext)
+
+    console.log("Grocery_data",Grocery_data)
 
     if (!Grocery_data) {
         return <Shimmer />;
     }
+    console.log("abcname", Usecontext);
 
     return (
         <>
@@ -27,6 +34,8 @@ const Grocery = () => {
                                 alt={Grocery_Cart.title}
                                 className=" w-full object-cover rounded "
                             />
+
+                            <p>{Usecontext.name}</p>
 
                             <div className="flex flex-col flex-grow justify-between">
 

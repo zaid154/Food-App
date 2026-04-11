@@ -6,10 +6,9 @@ import UserContext from "./Usercontext"
 
 const ProductView = () => {
     const { id } = useParams();
-    const data = useResipe(); // ✅ API reuse
+    const data = useResipe(); 
 
     const Usecontext=useContext(UserContext)
-
     console.log("abcname",Usecontext);
      
 
@@ -46,8 +45,10 @@ const ProductView = () => {
                 alt={product?.name}
             />
 
+
             {/* Details */}
             <div className="ml-6 flex flex-col gap-2 w-full">
+            <p>{Usecontext.name}</p>
 
                 <h1 className="text-2xl font-bold">
                     {product?.name}

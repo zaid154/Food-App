@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LOGO } from "./../utils/Constants";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
-
+import { useSelector } from "react-redux";
 
 const Header = () => {
 
@@ -15,6 +15,10 @@ const Header = () => {
       setLoginbtn("Login");
     }
   };
+
+  const eactItem=useSelector((data)=>data.cart.item)
+  console.log("items",eactItem);
+
 
   return (
     <div className="flex justify-between m-1 p-2 border-2">
@@ -34,6 +38,7 @@ const Header = () => {
           <li><Link to="/About">About Us</Link></li>
           <li><Link to="/Contact">Contact Us</Link></li>
           <li><Link to="/Cart">Cart</Link></li>
+          <li>cart:{0}</li>
           <li className="log_in" onClick={btnchange}>
             {loginbtn}
           </li>
