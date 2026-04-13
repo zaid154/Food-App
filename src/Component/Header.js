@@ -16,8 +16,8 @@ const Header = () => {
     }
   };
 
-  const eactItem=useSelector((data)=>data.cart.item)
-  console.log("items",eactItem);
+  const cartItem=useSelector((data)=>data.cart.item)
+  console.log("items",cartItem);
 
 
   return (
@@ -37,8 +37,7 @@ const Header = () => {
           <li><Link to="/grocery">Grocery</Link></li>
           <li><Link to="/About">About Us</Link></li>
           <li><Link to="/Contact">Contact Us</Link></li>
-          <li><Link to="/Cart">Cart</Link></li>
-          <li>cart:{0}</li>
+          <li><Link to="/Cart">Cart : {cartItem.length}</Link></li>
           <li className="log_in" onClick={btnchange}>
             {loginbtn}
           </li>

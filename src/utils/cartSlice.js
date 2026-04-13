@@ -3,9 +3,9 @@ import { createSlice, isAction } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        item: ["PIZZA", "BURGGER"]
+        item: []
     },
-    reducer: {
+    reducers: {
         addCart: (state, action) => {
             state.item.push(action.payload)
         },
@@ -18,7 +18,7 @@ const cartSlice = createSlice({
     }
 })
 
-const { addCart, reducer, clearCart } = cartSlice.actions
+export const { addCart, removeCart, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer
 

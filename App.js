@@ -7,7 +7,7 @@ import Footer from "./src/Component/Footer.js"
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./src/Component/About.js";
 import Contact from "./src/Component/Contact.js";
-import Order_Cart from "./src/Component/Order_Cart.js";
+import AddToCard from "./src/Component/AddToCard.js";
 import Error from "./src/Component/Error.js";
 import ProductView from "./src/Component/ProductView.js";
 import { lazy, useContext } from "react";
@@ -57,7 +57,7 @@ const appRuter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Order_Cart />,
+        element: <AddToCard />,
         errorElement: <Error />
       },
       {

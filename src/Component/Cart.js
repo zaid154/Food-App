@@ -4,12 +4,19 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useResipe from "./useRecipes";
 import Cartwithdifficulty from "./Cartwithdifficulty";
-
+import { useDispatch } from "react-redux";
+import {addCart} from "../utils/cartSlice"
 
 const CardHandler = ({ data }) => {
   const des_namefood = data.name.split(" ");
   const Usecontext=useContext(UserContext)
-  console.log("abcname",Usecontext.name);
+  // console.log("abcname",Usecontext.name);
+  const Dispatch =useDispatch()
+  function cardHandler(item) {
+    Dispatch(addCart(item))
+    console.log("item",item);
+    
+  }
   return (
     <div className="flex flex-col p-2 border rounded w-55 h-[420]">
 
@@ -42,7 +49,7 @@ const CardHandler = ({ data }) => {
         </div>
 
         <div className="flex gap-4 mt-auto">
-          <button className="bg-pink-400 h-8 w-full rounded">
+          <button className="bg-pink-400 h-8 w-full rounded" onClick={()=>cardHandler(data)}>
             Add to cart
           </button>
 
