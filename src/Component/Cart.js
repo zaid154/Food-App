@@ -4,12 +4,18 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useResipe from "./useRecipes";
 import Cartwithdifficulty from "./Cartwithdifficulty";
+import { useDispatch } from "react-redux";
+import { addCart } from '../utils/cartSlice'
 
 
 const CardHandler = ({ data }) => {
   const des_namefood = data.name.split(" ");
-  const Usecontext=useContext(UserContext)
-  console.log("abcname",Usecontext.name);
+  const Usecontext = useContext(UserContext)
+  const dispatch = useDispatch()
+  console.log("abcname", Usecontext.name);
+  function cartHandler(item) {
+    dispatch(addCart(item))
+  }
   return (
     <div className="flex flex-col p-2 border rounded w-55 h-[420]">
 
@@ -25,7 +31,7 @@ const CardHandler = ({ data }) => {
           {des_namefood.slice(0, 3).join(" ")}
           {des_namefood.length > 3 && "..."}
         </p>
-        
+
         <p>{Usecontext.name}</p>
 
         <p className="font-bold text-md mt-1 text-center">
@@ -42,7 +48,7 @@ const CardHandler = ({ data }) => {
         </div>
 
         <div className="flex gap-4 mt-auto">
-          <button className="bg-pink-400 h-8 w-full rounded">
+          <button className="bg-pink-400 h-8 w-full rounded" onClick={()=>cartHandler(data)}>
             Add to cart
           </button>
 
