@@ -35,13 +35,17 @@ class Contact extends React.Component {
             <>
 
                 <div className="display flex flex-col items-center">
-                    <img
+                    {/* <img
                         src={avatar_url}
                         className="rounded-full w-80 h-80 m-4"
                     />
                     <h1><b>Name :</b> {name}</h1>
                     <h1><b>Created At :</b> {created_at}</h1>
-                    <h1><b>Mail ID :</b> zaidm1323@gmail.com</h1>
+                    <h1><b>Mail ID :</b> zaidm1323@gmail.com</h1> */}
+
+                    <input placeholder="Enter your email" className="border border-black rounded p-2 m-2" ></input>
+                    <input placeholder="Enter your message" className="border border-black rounded p-2 m-2" ></input>
+                    <button className="bg-gray-400 px-19 mt-4 pt-3 py-2 rounded text-white">Submit</button>
                 </div>
             </>
         )

@@ -12,10 +12,12 @@ const CardHandler = ({ data }) => {
   const des_namefood = data.name.split(" ");
   const Usecontext = useContext(UserContext)
   const dispatch = useDispatch()
-  console.log("abcname", Usecontext.name);
+  // console.log("abcname", Usecontext.name);
   function cartHandler(item) {
     dispatch(addCart(item))
   }
+  // console.log("data",data);
+
   return (
     <div className="flex flex-col p-2 border rounded w-55 h-[420]">
 
@@ -32,7 +34,7 @@ const CardHandler = ({ data }) => {
           {des_namefood.length > 3 && "..."}
         </p>
 
-        <p>{Usecontext.name}</p>
+        {/* <p>{Usecontext.name}</p> */}
 
         <p className="font-bold text-md mt-1 text-center">
           Ingredients
@@ -48,14 +50,14 @@ const CardHandler = ({ data }) => {
         </div>
 
         <div className="flex gap-4 mt-auto">
-          <button className="bg-pink-400 h-8 w-full rounded" onClick={()=>cartHandler(data)}>
-            Add to cart
-          </button>
+  <button className="border border-gray-400 text-gray-700 h-8 w-full rounded hover:bg-gray-100 transition " onClick={() => cartHandler(data)}>
+    Add to cart
+  </button>
 
-          <button className="bg-green-500 h-8 w-full rounded">
-            Buy now
-          </button>
-        </div>
+  <button className="bg-black text-white h-8 w-full rounded hover:bg-gray-900 transition">
+    Buy now
+  </button>
+</div>
 
       </div>
     </div>

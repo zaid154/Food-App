@@ -30,7 +30,12 @@ let App = () => {
       </UseContext.Provider>
       </Provider>
 
-      {/* <Footer /> */}
+      {/* <Provider store={appStore}>
+      <Header />
+      <Outlet />
+      </Provider> */}
+
+      <Footer />
     </>
   );
 };

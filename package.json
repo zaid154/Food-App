@@ -6,7 +6,8 @@
     "start": "npx parcel index.html",
     "dev": "npx parcel index.html",
     "build": "npx parcel build index.html",
-    "test": "jest"
+    "test": "jest",
+    "watch-jest": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -26,8 +27,10 @@
     "parcel": "^2.16.3"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.28.5",
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/postcss": "^4.2.1",
+    "lucide-react": "^1.11.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.2.0",
