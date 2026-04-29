@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import useResipe from "./useRecipes";
 import Cartwithdifficulty from "./Cartwithdifficulty";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { addCart } from '../utils/cartSlice'
 
 
@@ -18,6 +19,20 @@ const CardHandler = ({ data }) => {
   }
   // console.log("data",data);
 
+=======
+import {addCart} from "../utils/cartSlice"
+
+const CardHandler = ({ data }) => {
+  const des_namefood = data.name.split(" ");
+  const Usecontext=useContext(UserContext)
+  // console.log("abcname",Usecontext.name);
+  const Dispatch =useDispatch()
+  function cardHandler(item) {
+    Dispatch(addCart(item))
+    console.log("item",item);
+    
+  }
+>>>>>>> 5628179a55284007f8dc614178d20affbbf3c7b0
   return (
     <div className="flex flex-col p-2 border rounded w-55 h-[420]">
 
@@ -50,9 +65,15 @@ const CardHandler = ({ data }) => {
         </div>
 
         <div className="flex gap-4 mt-auto">
+<<<<<<< HEAD
   <button className="border border-gray-400 text-gray-700 h-8 w-full rounded hover:bg-gray-100 transition " onClick={() => cartHandler(data)}>
     Add to cart
   </button>
+=======
+          <button className="bg-pink-400 h-8 w-full rounded" onClick={()=>cardHandler(data)}>
+            Add to cart
+          </button>
+>>>>>>> 5628179a55284007f8dc614178d20affbbf3c7b0
 
   <button className="bg-black text-white h-8 w-full rounded hover:bg-gray-900 transition">
     Buy now

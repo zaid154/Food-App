@@ -7,7 +7,11 @@ import Footer from "./src/Component/Footer.js"
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./src/Component/About.js";
 import Contact from "./src/Component/Contact.js";
+<<<<<<< HEAD
 import AddToCart from "./src/Component/addToCart.js";
+=======
+import AddToCard from "./src/Component/AddToCard.js";
+>>>>>>> 5628179a55284007f8dc614178d20affbbf3c7b0
 import Error from "./src/Component/Error.js";
 import ProductView from "./src/Component/ProductView.js";
 import { lazy, useContext } from "react";
@@ -19,15 +23,15 @@ import appStore from "./src/utils/Store.js"
 import { Provider } from "react-redux";
 
 let App = () => {
-  const [username,setusername]= useState("zaid")
+  const [username, setusername] = useState("zaid")
   return (
     <>
       <Provider store={appStore}>
-      <UseContext.Provider value={{ name: username}}>
-      <Header />
-      <Input username={username} setusername={setusername}/>
-      <Outlet />
-      </UseContext.Provider>
+        <UseContext.Provider value={{ name: username }}>
+          <Header />
+          <Input username={username} setusername={setusername} />
+          <Outlet />
+        </UseContext.Provider>
       </Provider>
 
       {/* <Provider store={appStore}>
@@ -67,7 +71,7 @@ const appRuter = createBrowserRouter([
       },
       {
         path: "restaurant/:id?",
-        element:  <ProductView /> 
+        element: <ProductView />
       },
       {
         path: "/grocery",
