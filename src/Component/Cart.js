@@ -1,98 +1,94 @@
 import { useEffect, useState, useContext } from "react";
-import UserContext from "./Usercontext"
+import UserContext from "./Usercontext";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useResipe from "./useRecipes";
 import Cartwithdifficulty from "./Cartwithdifficulty";
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
-import { addCart } from '../utils/cartSlice'
+import { addCart } from "../utils/cartSlice";
 
 
 const CardHandler = ({ data }) => {
-  const des_namefood = data.name.split(" ");
-  const Usecontext = useContext(UserContext)
-  const dispatch = useDispatch()
-  // console.log("abcname", Usecontext.name);
-  function cartHandler(item) {
-    dispatch(addCart(item))
-  }
-  // console.log("data",data);
 
-=======
-import {addCart} from "../utils/cartSlice"
+  const { name, image, ingredients, caloriesPerServing, rating } = data;
 
-const CardHandler = ({ data }) => {
-  const des_namefood = data.name.split(" ");
-  const Usecontext=useContext(UserContext)
-  // console.log("abcname",Usecontext.name);
-  const Dispatch =useDispatch()
-  function cardHandler(item) {
-    Dispatch(addCart(item))
-    console.log("item",item);
-    
-  }
->>>>>>> 5628179a55284007f8dc614178d20affbbf3c7b0
+  const shortName = name.split(" ").slice(0, 3).join(" ");
+  const userContext = useContext(UserContext);
+  const dispatch = useDispatch();
+
+  const cartHandler = (item) => {
+    dispatch(addCart(item));
+    console.log("Added item:", item);
+  };
+
   return (
-    <div className="flex flex-col p-2 border rounded w-55 h-[420]">
+    <div className="flex flex-col p-2 border rounded w-55 h-[420px]">
 
+      {/* Image */}
       <img
-        src={data.image}
-        alt={data.name}
+        src={image}
+        alt={name}
         className="object-cover rounded"
       />
 
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-grow">
 
+        {/* Name */}
         <p className="font-bold mt-2 text-mid">
-          {des_namefood.slice(0, 3).join(" ")}
-          {des_namefood.length > 3 && "..."}
+          {shortName}
+          {name.split(" ").length > 3 && "..."}
         </p>
 
-        {/* <p>{Usecontext.name}</p> */}
-
+        {/* Ingredients */}
         <p className="font-bold text-md mt-1 text-center">
           Ingredients
         </p>
 
         <p className="text-[13px] mb-3 line-clamp-3">
-          {data.ingredients.join(", ")}
+          {ingredients.join(", ")}
         </p>
 
+        {/* Price + Rating */}
         <div className="flex justify-between mt-auto mb-2">
-          <span>₹{data.caloriesPerServing}</span>
-          <span>{data.rating} ⭐</span>
+          <span>₹{caloriesPerServing}</span>
+          <span>{rating} ⭐</span>
         </div>
 
-        <div className="flex gap-4 mt-auto">
-<<<<<<< HEAD
-  <button className="border border-gray-400 text-gray-700 h-8 w-full rounded hover:bg-gray-100 transition " onClick={() => cartHandler(data)}>
-    Add to cart
-  </button>
-=======
-          <button className="bg-pink-400 h-8 w-full rounded" onClick={()=>cardHandler(data)}>
+        {/* Buttons */}
+        <div className="flex gap-4">
+
+          <button
+            className="border border-gray-400 text-gray-700 h-8 w-full rounded hover:bg-gray-100 transition"
+            onClick={() => cartHandler(data)}
+          >
             Add to cart
           </button>
->>>>>>> 5628179a55284007f8dc614178d20affbbf3c7b0
 
-  <button className="bg-black text-white h-8 w-full rounded hover:bg-gray-900 transition">
-    Buy now
-  </button>
-</div>
+          <button className="bg-black text-white h-8 w-full rounded hover:bg-gray-900 transition">
+            Buy now
+          </button>
 
+        </div>
       </div>
     </div>
   );
 };
 
+
+// ✅ HOC
 const CardWithDifficulty = Cartwithdifficulty(CardHandler);
 
+
+// ✅ Main Component
 const Card = () => {
+
   const [products, setProducts] = useState([]);
   const [finalProducts, setFinalProducts] = useState([]);
   const [inputData, setInputData] = useState("");
+
   const jsondata = useResipe();
 
+  // API data load
   useEffect(() => {
     if (jsondata?.recipes) {
       setProducts(jsondata.recipes);
@@ -100,6 +96,7 @@ const Card = () => {
     }
   }, [jsondata]);
 
+  // Top Rated Filter
   const topRatedFood = () => {
     const filtered = finalProducts.filter(
       (p) => p.rating >= 4.7
@@ -107,6 +104,7 @@ const Card = () => {
     setProducts(filtered);
   };
 
+  // High Calories Filter
   const priceFood = () => {
     const filtered = finalProducts.filter(
       (p) => p.caloriesPerServing >= 500
@@ -114,15 +112,13 @@ const Card = () => {
     setProducts(filtered);
   };
 
+  // Search
   const searchFood = () => {
     const filtered = finalProducts.filter((p) =>
       p.name.toLowerCase().includes(inputData.toLowerCase())
     );
     setProducts(filtered);
   };
-
-
-
 
   return (
     <>
@@ -160,6 +156,7 @@ const Card = () => {
         >
           Search
         </button>
+
       </div>
 
       {/* Cards */}

@@ -1,29 +1,31 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import "./App.css";
+
 import Header from "./src/Component/Header";
 import Cart from "./src/Component/Cart";
-import Footer from "./src/Component/Footer.js"
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./src/Component/About.js";
-import Contact from "./src/Component/Contact.js";
-<<<<<<< HEAD
-import AddToCart from "./src/Component/addToCart.js";
-=======
-import AddToCard from "./src/Component/AddToCard.js";
->>>>>>> 5628179a55284007f8dc614178d20affbbf3c7b0
-import Error from "./src/Component/Error.js";
-import ProductView from "./src/Component/ProductView.js";
-import { lazy, useContext } from "react";
-import Shimmer from "./src/Component/Shimmer.js";
-import UseContext from "./src/Component/Usercontext.js"
-const Grocery = lazy(() => import('./src/Component/Grocery.js'))
-import Input from "./src/Component/Input.js"
-import appStore from "./src/utils/Store.js"
-import { Provider } from "react-redux";
+import Footer from "./src/Component/Footer";
+import About from "./src/Component/About";
+import Contact from "./src/Component/Contact";
+import AddToCart from "./src/Component/AddToCart"; // ✅ FIXED
+import Error from "./src/Component/Error";
+import ProductView from "./src/Component/ProductView";
+import Shimmer from "./src/Component/Shimmer";
+import UseContext from "./src/Component/Usercontext";
+import Input from "./src/Component/Input";
 
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
+import appStore from "./src/utils/Store";
+
+// Lazy Load
+const Grocery = lazy(() => import("./src/Component/Grocery"));
+
+
+// ✅ App Layout
 let App = () => {
-  const [username, setusername] = useState("zaid")
+  const [username, setusername] = useState("zaid");
+
   return (
     <>
       <Provider store={appStore}>
@@ -34,16 +36,13 @@ let App = () => {
         </UseContext.Provider>
       </Provider>
 
-      {/* <Provider store={appStore}>
-      <Header />
-      <Outlet />
-      </Provider> */}
-
       <Footer />
     </>
   );
 };
 
+
+// ✅ Routing
 const appRuter = createBrowserRouter([
   {
     path: "/",
@@ -56,18 +55,15 @@ const appRuter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
-        errorElement: <Error />
+        element: <About />
       },
       {
         path: "/contact",
-        element: <Contact name={"zaid"} add={"uppp"} />,
-        errorElement: <Error />
+        element: <Contact name={"zaid"} add={"uppp"} />
       },
       {
         path: "/cart",
-        element: <AddToCart />,
-        errorElement: <Error />
+        element: <AddToCart /> // ✅ FIXED
       },
       {
         path: "restaurant/:id?",
@@ -75,15 +71,17 @@ const appRuter = createBrowserRouter([
       },
       {
         path: "/grocery",
-        element: <Suspense fallback={<Shimmer />}><Grocery /></Suspense>
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Grocery />
+          </Suspense>
+        )
       }
     ]
   }
 ]);
 
+
+// ✅ Render
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(<RouterProvider router={appRuter} />);
-
-
-
