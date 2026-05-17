@@ -28,7 +28,6 @@ test("Cart link test", () => {
         </BrowserRouter>
     );
 
-    // Match the "Cart" text (the link renders as "Cart 0" when cart is empty)
     const cartLink = screen.getByText(/Cart/i);
     expect(cartLink).toBeInTheDocument();
 });

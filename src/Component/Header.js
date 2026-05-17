@@ -13,13 +13,11 @@ const Header = () => {
     setLoginbtn(loginbtn === "Login" ? "Logout" : "Login");
   };
 
-  // ✅ FIXED (clean + correct naming)
   const cartItem = useSelector((state) => state.cart.item);
 
   return (
     <div className="flex justify-between m-1 p-2 border border-gray-300 rounded items-center">
       
-      {/* Logo */}
       <div className="logo w-15">
         <img
           src={LOGO}
@@ -28,7 +26,6 @@ const Header = () => {
         />
       </div>
 
-      {/* Nav */}
       <div className="flex gap-1 p-4 list-none font-bold items-center justify-center">
         <ul className="flex space-x-9">
 
@@ -41,19 +38,16 @@ const Header = () => {
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/contact">Contact Us</Link></li>
 
-          {/* ✅ Cart Count */}
           <li>
             <Link to="/cart">
               Cart ({cartItem.length})
             </Link>
           </li>
 
-          {/* Login Button */}
           <li className="log_in cursor-pointer" onClick={btnchange}>
             {loginbtn}
           </li>
 
-          {/* Dark Mode */}
           <button
             onClick={() => document.body.classList.toggle("dark")}
             className="bg-gray-700 text-white px-4 rounded-2xl h-5 text-sm"

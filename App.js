@@ -7,7 +7,7 @@ import Cart from "./src/Component/Cart";
 import Footer from "./src/Component/Footer";
 import About from "./src/Component/About";
 import Contact from "./src/Component/Contact";
-import AddToCart from "./src/Component/AddToCart"; // ✅ FIXED
+import AddToCart from "./src/Component/AddToCart"; 
 import Error from "./src/Component/Error";
 import ProductView from "./src/Component/ProductView";
 import Shimmer from "./src/Component/Shimmer";
@@ -22,7 +22,6 @@ import appStore from "./src/utils/Store";
 const Grocery = lazy(() => import("./src/Component/Grocery"));
 
 
-// ✅ App Layout
 let App = () => {
   const [username, setusername] = useState("zaid");
 
@@ -42,7 +41,6 @@ let App = () => {
 };
 
 
-// ✅ Routing
 const appRuter = createBrowserRouter([
   {
     path: "/",
@@ -63,7 +61,7 @@ const appRuter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <AddToCart /> // ✅ FIXED
+        element: <AddToCart />
       },
       {
         path: "restaurant/:id?",

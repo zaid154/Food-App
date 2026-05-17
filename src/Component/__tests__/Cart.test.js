@@ -4,7 +4,7 @@ import Cart from "../Cart";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import appStore from "../../utils/Store";
-import { act } from "react";  // Add this import
+import { act } from "react";  
 
 jest.mock("../useRecipes", () => ({
   __esModule: true,
@@ -34,7 +34,7 @@ const mockData = {
 };
 
 beforeEach(() => {
-  useRecipes.mockReturnValue(mockData);  // Return object with recipes
+  useRecipes.mockReturnValue(mockData); 
 });
 
 test("renders cart items from mocked useRecipes", async () => {
@@ -48,7 +48,6 @@ test("renders cart items from mocked useRecipes", async () => {
     );
   });
 
-  // Wait for async updates
   await waitFor(() => {
     const item = screen.getByText(/classic margherita pizza/i);
     expect(item).toBeInTheDocument();

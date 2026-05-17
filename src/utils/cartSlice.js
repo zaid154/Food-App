@@ -9,7 +9,6 @@ const cartSlice = createSlice({
 
   reducers: {
 
-    // ✅ ADD ITEM (with quantity)
     addCart: (state, action) => {
       const existingItem = state.item.find(
         (item) => item.id === action.payload.id
@@ -22,7 +21,6 @@ const cartSlice = createSlice({
       }
     },
 
-    // ✅ REMOVE ITEM (decrease quantity or remove)
     removeCart: (state, action) => {
       const existingItem = state.item.find(
         (item) => item.id === action.payload
@@ -37,7 +35,6 @@ const cartSlice = createSlice({
       }
     },
 
-    // ✅ CLEAR CART
     clearCart: (state) => {
       state.item = [];
     }

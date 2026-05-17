@@ -18,13 +18,12 @@ const CardHandler = ({ data }) => {
 
   const cartHandler = (item) => {
     dispatch(addCart(item));
-    console.log("Added item:", item);
+    // console.log("Added item:", item);
   };
 
   return (
     <div className="flex flex-col p-2 border rounded w-55 h-[420px]">
 
-      {/* Image */}
       <img
         src={image}
         alt={name}
@@ -33,13 +32,11 @@ const CardHandler = ({ data }) => {
 
       <div className="flex flex-col flex-grow">
 
-        {/* Name */}
         <p className="font-bold mt-2 text-mid">
           {shortName}
           {name.split(" ").length > 3 && "..."}
         </p>
 
-        {/* Ingredients */}
         <p className="font-bold text-md mt-1 text-center">
           Ingredients
         </p>
@@ -48,13 +45,11 @@ const CardHandler = ({ data }) => {
           {ingredients.join(", ")}
         </p>
 
-        {/* Price + Rating */}
         <div className="flex justify-between mt-auto mb-2">
           <span>₹{caloriesPerServing}</span>
           <span>{rating} ⭐</span>
         </div>
 
-        {/* Buttons */}
         <div className="flex gap-4">
 
           <button
@@ -75,11 +70,9 @@ const CardHandler = ({ data }) => {
 };
 
 
-// ✅ HOC
 const CardWithDifficulty = Cartwithdifficulty(CardHandler);
 
 
-// ✅ Main Component
 const Card = () => {
 
   const [products, setProducts] = useState([]);
@@ -88,7 +81,7 @@ const Card = () => {
 
   const jsondata = useResipe();
 
-  // API data load
+  
   useEffect(() => {
     if (jsondata?.recipes) {
       setProducts(jsondata.recipes);
@@ -96,7 +89,6 @@ const Card = () => {
     }
   }, [jsondata]);
 
-  // Top Rated Filter
   const topRatedFood = () => {
     const filtered = finalProducts.filter(
       (p) => p.rating >= 4.7
@@ -104,7 +96,6 @@ const Card = () => {
     setProducts(filtered);
   };
 
-  // High Calories Filter
   const priceFood = () => {
     const filtered = finalProducts.filter(
       (p) => p.caloriesPerServing >= 500
@@ -112,7 +103,6 @@ const Card = () => {
     setProducts(filtered);
   };
 
-  // Search
   const searchFood = () => {
     const filtered = finalProducts.filter((p) =>
       p.name.toLowerCase().includes(inputData.toLowerCase())
@@ -122,7 +112,7 @@ const Card = () => {
 
   return (
     <>
-      {/* Buttons */}
+    
       <div className="flex gap-4 m-4 justify-center">
         <button
           className="bg-green-500 text-white h-10 px-4 rounded"
@@ -139,7 +129,7 @@ const Card = () => {
         </button>
       </div>
 
-      {/* Search */}
+      
       <div className="flex justify-center m-4">
 
         <input
@@ -159,7 +149,7 @@ const Card = () => {
 
       </div>
 
-      {/* Cards */}
+      
       {products.length === 0 ? (
         <Shimmer />
       ) : (
