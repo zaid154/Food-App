@@ -1,7 +1,46 @@
 @import "tailwindcss";
 
-body.dark {
-  background-color: #302f2f;
-  color: white;
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.dark {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark header {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  border-color: #1e293b !important;
+}
+
+body.dark .bg-white,
+body.dark .bg-white\/80,
+body.dark .bg-white\/85 {
+  background-color: #1e293b !important;
+  color: #e2e8f0;
+}
+
+body.dark .text-slate-900,
+body.dark .text-slate-700,
+body.dark .text-slate-800 {
+  color: #e2e8f0 !important;
+}
+
+body.dark .text-slate-600,
+body.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+body.dark .ring-slate-200,
+body.dark .border-slate-200,
+body.dark .border-slate-300 {
+  --tw-ring-color: #334155;
+  border-color: #334155 !important;
+}
