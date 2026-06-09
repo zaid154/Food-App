@@ -20,26 +20,27 @@ import Orders from "./src/Component/Orders";
 import ProtectedRoute from "./src/Component/ProtectedRoute";
 import ChatGptModel from "./src/Component/ChatGptModel";
 
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, useLocation } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./src/utils/Store";
+import "./src/utils/firebase";
 
-// Lazy Load
 const Grocery = lazy(() => import("./src/Component/Grocery"));
 
-
-// App Layout
 let App = () => {
-  // user state holds the logged-in user (null when not logged in)
   const [user, setUser] = useState(null);
+  const location = useLocation();
 
-  // when the app starts, check if a user was logged in earlier
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("loggedUser"));
     if (saved) {
       setUser(saved);
     }
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <Provider store={appStore}>
@@ -56,8 +57,6 @@ let App = () => {
   );
 };
 
-
-// Routing
 const appRuter = createBrowserRouter([
   {
     path: "/",
@@ -93,7 +92,6 @@ const appRuter = createBrowserRouter([
         element: <AddToCart />
       },
       {
-        // only logged-in users can reach checkout
         path: "/checkout",
         element: (
           <ProtectedRoute>
@@ -102,7 +100,6 @@ const appRuter = createBrowserRouter([
         )
       },
       {
-        // only logged-in users can see their orders
         path: "/orders",
         element: (
           <ProtectedRoute>
@@ -130,7 +127,5 @@ const appRuter = createBrowserRouter([
   }
 ]);
 
-
-// Render
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRuter} />);

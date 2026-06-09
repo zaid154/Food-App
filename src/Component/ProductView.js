@@ -15,12 +15,10 @@ const ProductView = () => {
 
     const [openStep, setOpenStep] = useState(null);
 
-    // IMPORTANT: all hooks must be called in the same order every render.
-    // so we call useSelector here at the top, BEFORE any early return.
+    // keep selectors above the early return so hook order stays stable
     const cartItems = useSelector((store) => store.cart.item);
     const wishlistItems = useSelector((store) => store.wishlist.item);
 
-    // show shimmer while the api data is loading
     if (!data) return <Shimmer />;
 
     const product = data.recipes.find((item) => item.id == id);
@@ -39,7 +37,6 @@ const ProductView = () => {
         );
     }
 
-    // check if this recipe is already in cart / wishlist
     const inCart = cartItems.find((i) => i.id === product.id);
     const cartQty = inCart ? inCart.quantity : 0;
     const isLiked = wishlistItems.some((i) => i.id === product.id);
@@ -56,13 +53,10 @@ const ProductView = () => {
         dispatch(removeCart(product.id));
     };
 
-    // BUY NOW — just this one product, do NOT touch the cart.
-    // we pass the product to /checkout using router state.
     const handleBuyNow = () => {
         navigate("/checkout", { state: { buyNowItem: product } });
     };
 
-    // toggle wishlist on / off when heart is clicked
     const handleLike = () => {
         if (isLiked) {
             dispatch(removeWishlist(product.id));
@@ -72,41 +66,32 @@ const ProductView = () => {
     };
 
     return (
-        <section className="bg-gradient-to-b from-amber-50 via-white to-white">
+        <section className="bg-gray-50">
             <div className="mx-auto max-w-6xl px-4 py-8 md:py-12">
-
-                {/* breadcrumb */}
                 <nav className="mb-6 text-sm text-slate-500">
-                    <Link to="/" className="hover:text-orange-600">Home</Link>
+                    <Link to="/" className="hover:text-red-600">Home</Link>
                     <span className="mx-2">›</span>
                     <span className="text-slate-700">{product.name}</span>
                 </nav>
 
                 <div className="grid gap-8 lg:grid-cols-2">
-
-                    {/* LEFT — image with badges. aspect-square keeps a clean
-                        equal box on every screen so the food photo never gets
-                        stretched or awkwardly cropped */}
-                    <div className="relative aspect-square w-full overflow-hidden rounded-3xl bg-amber-50 shadow-xl">
+                    <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
                         <img
                             src={product.image}
                             alt={product.name}
                             className="h-full w-full object-cover"
                         />
 
-                        {/* rating badge */}
-                        <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-sm font-bold text-amber-700 shadow">
-                            ★ {product.rating} ({product.reviewCount})
+                        <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-md bg-green-600 px-2.5 py-1 text-sm font-bold text-white shadow">
+                            {product.rating} ★ ({product.reviewCount})
                         </span>
 
-                        {/* difficulty badge */}
                         {product.difficulty && (
-                            <span className="absolute left-4 top-14 rounded-full bg-slate-900 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow">
+                            <span className="absolute left-4 top-14 rounded bg-black/70 px-3 py-1 text-xs font-semibold text-white shadow">
                                 {product.difficulty}
                             </span>
                         )}
 
-                        {/* big heart button on the image */}
                         <button
                             onClick={handleLike}
                             aria-label="Save to favorites"
@@ -116,21 +101,19 @@ const ProductView = () => {
                         </button>
                     </div>
 
-                    {/* RIGHT — details */}
                     <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-orange-600">
-                            {product.cuisine} cuisine
+                        <p className="text-sm font-medium text-gray-500">
+                            {product.cuisine}
                         </p>
 
-                        <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-900 md:text-4xl">
+                        <h1 className="mt-1 text-2xl font-bold tracking-tight text-gray-900 md:text-3xl">
                             {product.name}
                         </h1>
 
-                        <p className="mt-2 text-sm text-slate-500">
+                        <p className="mt-2 text-sm text-gray-500">
                             {Array.isArray(product.mealType) ? product.mealType.join(" • ") : product.mealType}
                         </p>
 
-                        {/* quick info cards */}
                         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
                             <div className="rounded-2xl border border-slate-200 bg-white p-3 text-center shadow-sm">
                                 <p className="text-2xl">⏱️</p>
@@ -157,52 +140,48 @@ const ProductView = () => {
                             </div>
                         </div>
 
-                        {/* price */}
-                        <div className="mt-6 rounded-2xl bg-orange-50 p-4">
-                            <p className="text-xs font-semibold uppercase tracking-wider text-orange-700">Price</p>
+                        <div className="mt-6 rounded-xl bg-red-50 p-4">
+                            <p className="text-xs font-semibold uppercase tracking-wider text-red-700">Price</p>
                             <p className="mt-1 text-4xl font-extrabold text-slate-900">
                                 ₹{product.caloriesPerServing}
                                 <span className="ml-2 text-xs font-medium text-slate-500">incl. taxes</span>
                             </p>
                         </div>
 
-                        {/* action buttons */}
                         <div className="mt-5 flex flex-wrap gap-3">
-                            {/* cart action — switches to a stepper if item is already in cart */}
                             {cartQty === 0 ? (
                                 <button
                                     onClick={handleAddToCart}
-                                    className="flex-1 rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
+                                    className="flex-1 rounded-md bg-red-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-red-700"
                                 >
                                     Add to cart
                                 </button>
                             ) : (
-                                <div className="flex flex-1 items-center justify-between rounded-full border-2 border-green-400 bg-green-50 px-3 py-1">
+                                <div className="flex flex-1 items-center justify-between rounded-md border-2 border-red-400 bg-red-50 px-3 py-1">
                                     <button
                                         onClick={handleRemoveFromCart}
-                                        className="h-9 w-9 rounded-full bg-white text-xl font-bold text-green-700 hover:bg-green-100"
+                                        className="h-9 w-9 rounded-md bg-white text-xl font-bold text-red-600 hover:bg-red-100"
                                     >
                                         −
                                     </button>
-                                    <span className="text-sm font-bold text-green-700">
+                                    <span className="text-sm font-bold text-red-600">
                                         In cart ({cartQty})
                                     </span>
                                     <button
                                         onClick={handleAddToCart}
-                                        className="h-9 w-9 rounded-full bg-white text-xl font-bold text-green-700 hover:bg-green-100"
+                                        className="h-9 w-9 rounded-md bg-white text-xl font-bold text-red-600 hover:bg-red-100"
                                     >
                                         +
                                     </button>
                                 </div>
                             )}
 
-                            {/* favorite button next to add-to-cart */}
                             <button
                                 onClick={handleLike}
-                                className={`flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold transition hover:-translate-y-0.5 ${
+                                className={`flex items-center gap-2 rounded-md border px-5 py-3 text-sm font-bold transition ${
                                     isLiked
                                         ? "border-red-300 bg-red-50 text-red-600"
-                                        : "border-slate-300 bg-white text-slate-700 hover:border-red-300 hover:text-red-600"
+                                        : "border-gray-300 bg-white text-gray-700 hover:border-red-300 hover:text-red-600"
                                 }`}
                             >
                                 {isLiked ? "❤️ Saved" : "🤍 Save"}
@@ -210,22 +189,19 @@ const ProductView = () => {
 
                             <Link
                                 to="/cart"
-                                className="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-orange-300 hover:text-orange-600"
+                                className="rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 transition hover:border-red-300 hover:text-red-600"
                             >
                                 View cart
                             </Link>
                         </div>
 
-                        {/* Buy now — full-width orange call to action.
-                            adds item to cart and jumps to /checkout */}
                         <button
                             onClick={handleBuyNow}
-                            className="mt-3 w-full rounded-full bg-orange-500 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-orange-600"
+                            className="mt-3 w-full rounded-md bg-red-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-red-700"
                         >
                             Buy now →
                         </button>
 
-                        {/* ingredients */}
                         <div className="mt-8">
                             <h2 className="text-lg font-bold text-slate-900">
                                 Ingredients
@@ -237,7 +213,7 @@ const ProductView = () => {
                                 {product.ingredients?.map((item, i) => (
                                     <span
                                         key={i}
-                                        className="rounded-full bg-amber-100 px-3 py-1.5 text-xs font-medium text-amber-800"
+                                        className="rounded-md bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700"
                                     >
                                         {item}
                                     </span>
@@ -245,7 +221,6 @@ const ProductView = () => {
                             </div>
                         </div>
 
-                        {/* tags */}
                         {product.tags && product.tags.length > 0 && (
                             <div className="mt-6">
                                 <h2 className="text-lg font-bold text-slate-900">Tags</h2>
@@ -264,7 +239,6 @@ const ProductView = () => {
                     </div>
                 </div>
 
-                {/* Instructions */}
                 <div className="mt-12 rounded-3xl bg-white p-6 shadow-sm md:p-8">
                     <h2 className="text-2xl font-bold text-slate-900">
                         How to cook it

@@ -10,7 +10,7 @@ const Wishlist = () => {
     // empty state when nothing is liked
     if (wishlistItems.length === 0) {
         return (
-            <section className="flex min-h-[60vh] items-center justify-center bg-orange-50 px-4">
+            <section className="flex min-h-[60vh] items-center justify-center bg-gray-50 px-4">
                 <div className="max-w-md rounded-2xl bg-white p-8 text-center shadow">
                     <h1 className="text-2xl font-bold text-slate-900">
                         No favorites yet
@@ -20,7 +20,7 @@ const Wishlist = () => {
                     </p>
                     <Link
                         to="/"
-                        className="mt-5 inline-block rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white"
+                        className="mt-5 inline-block rounded-md bg-red-600 px-5 py-2 text-sm font-semibold text-white"
                     >
                         Browse recipes
                     </Link>
@@ -30,11 +30,11 @@ const Wishlist = () => {
     }
 
     return (
-        <section className="bg-orange-50 px-4 py-10">
+        <section className="bg-gray-50 px-4 py-10">
             <div className="mx-auto max-w-6xl">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-black text-slate-900">
+                        <h1 className="text-2xl font-bold text-gray-900">
                             My Favorites
                         </h1>
                         <p className="mt-1 text-sm text-slate-600">
@@ -73,7 +73,7 @@ const Wishlist = () => {
                                 <div className="mt-4 flex gap-2">
                                     <button
                                         onClick={() => dispatch(addCart(item))}
-                                        className="flex-1 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+                                        className="flex-1 rounded-md bg-red-600 px-3 py-2 text-xs font-semibold text-white hover:bg-red-700"
                                     >
                                         Add to cart
                                     </button>

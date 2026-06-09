@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { LOGO } from "./../utils/Constants";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import useOnline from "../utils/useOnline";
@@ -7,19 +7,19 @@ import UserContext from "./Usercontext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(() => localStorage.getItem("theme") === "dark");
   const status = useOnline();
   const navigate = useNavigate();
 
-  // get logged-in user from context
   const { user, setUser } = useContext(UserContext);
 
-  const toggleDark = () => {
-    document.body.classList.toggle("dark");
-    setDark((d) => !d);
-  };
+  useEffect(() => {
+    document.body.classList.toggle("dark", dark);
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  }, [dark]);
 
-  // when user clicks logout, clear it from localStorage and context
+  const toggleDark = () => setDark((d) => !d);
+
   const handleLogout = () => {
     localStorage.removeItem("loggedUser");
     setUser(null);
@@ -33,34 +33,28 @@ const Header = () => {
   const wishlistCount = wishlistItem.length;
 
   const linkClass = ({ isActive }) =>
-    `relative px-1 py-1 transition-colors hover:text-orange-500 ${
-      isActive ? "text-orange-600 after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-orange-500" : "text-slate-700"
+    `px-1 py-1 transition-colors hover:text-red-600 ${
+      isActive ? "text-red-600" : "text-gray-600"
     }`;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img src={LOGO} alt="YumRun logo" className="h-10 w-10 object-contain" />
-          <span className="hidden text-xl font-extrabold tracking-tight text-slate-900 sm:inline">
-            Yum<span className="text-orange-500">Run</span>
+          <img src={LOGO} alt="YumRun logo" className="h-9 w-9 object-contain" />
+          <span className="hidden text-xl font-bold tracking-tight text-gray-900 sm:inline">
+            Yum<span className="text-red-600">Run</span>
           </span>
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:block">
           <ul className="flex items-center gap-6 text-sm font-semibold">
             <li>
               <span
                 title={status ? "Online" : "Offline"}
-                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs ${
-                  status ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
-                }`}
+                className={`inline-flex items-center gap-1.5 text-xs font-medium ${status ? "text-green-600" : "text-gray-400"}`}
               >
-                <span
-                  className={`h-2 w-2 rounded-full ${status ? "bg-green-500" : "bg-red-500"}`}
-                />
+                <span className={`h-2 w-2 rounded-full ${status ? "bg-green-500" : "bg-gray-400"}`} />
                 {status ? "Online" : "Offline"}
               </span>
             </li>
@@ -70,14 +64,12 @@ const Header = () => {
             <li><NavLink to="/contact" className={linkClass}>Contact</NavLink></li>
             <li><NavLink to="/chat" className={linkClass}>AI Chat</NavLink></li>
 
-            {/* wishlist link with count */}
             <li>
               <NavLink to="/wishlist" className={linkClass}>
                 ❤️ {wishlistCount}
               </NavLink>
             </li>
 
-            {/* orders link, only when logged in */}
             {user && (
               <li><NavLink to="/orders" className={linkClass}>Orders</NavLink></li>
             )}
@@ -85,27 +77,22 @@ const Header = () => {
             <li>
               <NavLink
                 to="/cart"
-                className={({ isActive }) =>
-                  `relative inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold transition ${
-                    isActive ? "bg-orange-500 text-white" : "bg-slate-900 text-white hover:bg-slate-800"
-                  }`
-                }
+                className="relative inline-flex items-center gap-2 rounded-md bg-red-600 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-red-700"
               >
                 Cart
-                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-orange-400 px-1.5 text-xs font-bold text-slate-950">
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1.5 text-xs font-bold text-red-600">
                   {cartCount}
                 </span>
               </NavLink>
             </li>
 
-            {/* show login button or username + logout */}
             {user ? (
               <>
-                <li className="text-slate-700">Hi, {user.name}</li>
+                <li className="text-gray-700">Hi, {user.name}</li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="rounded-full border border-slate-300 px-4 py-1.5 text-sm font-semibold text-slate-700 hover:border-orange-300 hover:text-orange-600"
+                    className="rounded-md border border-gray-300 px-4 py-1.5 text-sm font-semibold text-gray-700 hover:border-red-300 hover:text-red-600"
                   >
                     Logout
                   </button>
@@ -115,7 +102,7 @@ const Header = () => {
               <li>
                 <Link
                   to="/login"
-                  className="rounded-full border border-slate-300 px-4 py-1.5 text-sm font-semibold text-slate-700 hover:border-orange-300 hover:text-orange-600"
+                  className="rounded-md border border-gray-300 px-4 py-1.5 text-sm font-semibold text-gray-700 hover:border-red-300 hover:text-red-600"
                 >
                   Login
                 </Link>
@@ -126,7 +113,7 @@ const Header = () => {
               <button
                 onClick={toggleDark}
                 aria-label="Toggle dark mode"
-                className="rounded-full bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-700"
+                className="rounded-md border border-gray-300 px-3 py-1.5 text-xs font-semibold text-gray-700 transition hover:bg-gray-50"
               >
                 {dark ? "Light" : "Dark"}
               </button>
@@ -134,7 +121,6 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setMenuOpen((o) => !o)}
           aria-label="Toggle menu"
@@ -151,17 +137,16 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {menuOpen && (
-        <nav className="border-t border-slate-200 bg-white md:hidden">
+        <nav className="border-t border-gray-200 bg-white md:hidden">
           <ul className="flex flex-col gap-1 px-4 py-3 text-sm font-semibold">
             <li>
               <span
                 className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs ${
-                  status ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
+                  status ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"
                 }`}
               >
-                <span className={`h-2 w-2 rounded-full ${status ? "bg-green-500" : "bg-red-500"}`} />
+                <span className={`h-2 w-2 rounded-full ${status ? "bg-green-500" : "bg-gray-400"}`} />
                 {status ? "Online" : "Offline"}
               </span>
             </li>
@@ -181,7 +166,7 @@ const Header = () => {
                   onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
                     `block rounded-lg px-3 py-2 ${
-                      isActive ? "bg-orange-50 text-orange-600" : "text-slate-700 hover:bg-slate-50"
+                      isActive ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-50"
                     }`
                   }
                 >
@@ -195,7 +180,7 @@ const Header = () => {
                 <NavLink
                   to="/orders"
                   onClick={() => setMenuOpen(false)}
-                  className="block rounded-lg px-3 py-2 text-slate-700 hover:bg-slate-50"
+                  className="block rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-50"
                 >
                   My Orders
                 </NavLink>
@@ -206,10 +191,10 @@ const Header = () => {
               <NavLink
                 to="/cart"
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between rounded-lg bg-slate-900 px-3 py-2 text-white"
+                className="flex items-center justify-between rounded-lg bg-red-600 px-3 py-2 text-white"
               >
                 <span>Cart</span>
-                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-orange-400 px-1.5 text-xs font-bold text-slate-950">
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white px-1.5 text-xs font-bold text-red-600">
                   {cartCount}
                 </span>
               </NavLink>
@@ -222,7 +207,7 @@ const Header = () => {
                     handleLogout();
                     setMenuOpen(false);
                   }}
-                  className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-slate-700"
+                  className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-gray-700"
                 >
                   Logout ({user.name})
                 </button>
@@ -230,7 +215,7 @@ const Header = () => {
                 <Link
                   to="/login"
                   onClick={() => setMenuOpen(false)}
-                  className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-center text-slate-700"
+                  className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-center text-gray-700"
                 >
                   Login
                 </Link>
@@ -238,7 +223,7 @@ const Header = () => {
 
               <button
                 onClick={toggleDark}
-                className="flex-1 rounded-lg bg-slate-900 px-3 py-2 text-white"
+                className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-gray-700"
               >
                 {dark ? "Light" : "Dark"}
               </button>

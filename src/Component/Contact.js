@@ -52,14 +52,13 @@ class Contact extends React.Component {
         const { form, sent, error } = this.state;
 
         return (
-            <section className="bg-gradient-to-b from-orange-50/60 via-white to-white">
+            <section className="bg-gray-50">
                 <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:py-16 lg:grid-cols-[1fr_1.1fr]">
-                    {/* Profile / info */}
-                    <aside className="rounded-3xl bg-slate-900 p-8 text-white shadow-xl">
-                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-200">
+                    <aside className="rounded-2xl bg-gray-900 p-8 text-white">
+                        <p className="text-sm font-semibold text-red-400">
                             Get in touch
                         </p>
-                        <h1 className="mt-3 text-3xl font-black md:text-4xl">
+                        <h1 className="mt-2 text-2xl font-bold md:text-3xl">
                             We'd love to hear from you.
                         </h1>
                         <p className="mt-3 text-sm leading-6 text-slate-300">
@@ -78,7 +77,7 @@ class Contact extends React.Component {
                                             href={html_url}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="mt-1 inline-block text-xs font-semibold text-orange-300 underline"
+                                            className="mt-1 inline-block text-xs font-semibold text-red-300 underline"
                                         >
                                             github.com/{login}
                                         </a>
@@ -94,7 +93,6 @@ class Contact extends React.Component {
                         </ul>
                     </aside>
 
-                    {/* Form */}
                     <form
                         onSubmit={this.handleSubmit}
                         className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 md:p-8"
@@ -114,7 +112,7 @@ class Contact extends React.Component {
                                     value={form.email}
                                     onChange={this.handleChange("email")}
                                     placeholder="you@example.com"
-                                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-orange-300 focus:ring-2 focus:ring-orange-100"
+                                    className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-red-400"
                                 />
                             </div>
 
@@ -127,7 +125,7 @@ class Contact extends React.Component {
                                     value={form.subject}
                                     onChange={this.handleChange("subject")}
                                     placeholder="What's it about?"
-                                    className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-orange-300 focus:ring-2 focus:ring-orange-100"
+                                    className="mt-1 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-red-400"
                                 />
                             </div>
 
@@ -140,7 +138,7 @@ class Contact extends React.Component {
                                     value={form.message}
                                     onChange={this.handleChange("message")}
                                     placeholder="Tell us a bit more..."
-                                    className="mt-1 w-full resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-orange-300 focus:ring-2 focus:ring-orange-100"
+                                    className="mt-1 w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-red-400"
                                 />
                             </div>
                         </div>

@@ -16,31 +16,73 @@ body.dark {
 }
 
 body.dark header {
-  background-color: rgba(15, 23, 42, 0.9) !important;
+  background-color: #0f172a !important;
   border-color: #1e293b !important;
 }
 
+/* page / section backgrounds */
+body.dark .bg-gray-50,
+body.dark .bg-gray-100 {
+  background-color: #0f172a !important;
+}
+
+/* cards and surfaces */
 body.dark .bg-white,
 body.dark .bg-white\/80,
-body.dark .bg-white\/85 {
+body.dark .bg-white\/85,
+body.dark .bg-white\/95 {
   background-color: #1e293b !important;
   color: #e2e8f0;
 }
 
+/* headings / primary text */
+body.dark .text-gray-900,
+body.dark .text-gray-800,
+body.dark .text-gray-700,
 body.dark .text-slate-900,
-body.dark .text-slate-700,
-body.dark .text-slate-800 {
+body.dark .text-slate-800,
+body.dark .text-slate-700 {
   color: #e2e8f0 !important;
 }
 
+/* muted text */
+body.dark .text-gray-600,
+body.dark .text-gray-500,
+body.dark .text-gray-400,
 body.dark .text-slate-600,
-body.dark .text-slate-500 {
+body.dark .text-slate-500,
+body.dark .text-slate-400 {
   color: #94a3b8 !important;
 }
 
+/* borders / rings */
+body.dark .border-gray-100,
+body.dark .border-gray-200,
+body.dark .border-gray-300,
+body.dark .ring-gray-200,
 body.dark .ring-slate-200,
+body.dark .border-slate-100,
 body.dark .border-slate-200,
 body.dark .border-slate-300 {
   --tw-ring-color: #334155;
   border-color: #334155 !important;
+}
+
+/* inputs */
+body.dark input,
+body.dark textarea,
+body.dark select {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #334155 !important;
+}
+
+body.dark input::placeholder,
+body.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* light chip backgrounds */
+body.dark .bg-red-50 {
+  background-color: rgba(220, 38, 38, 0.15) !important;
 }

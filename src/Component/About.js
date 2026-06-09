@@ -12,17 +12,17 @@ const About = () => {
   const [likes, setLikes] = useState(0);
 
   return (
-    <section className="bg-gradient-to-b from-orange-50/60 via-white to-white">
+    <section className="bg-gray-50">
       <div className="mx-auto max-w-6xl px-4 py-10 md:py-16">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-600">
+            <p className="text-sm font-semibold text-red-600">
               About YumRun
             </p>
-            <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-900 md:text-5xl">
+            <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
               Real food, fast — straight to your door.
             </h1>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-gray-600">
               YumRun is a small but mighty team of food lovers building a friendlier
               way to discover and order meals. We pick the best dishes from local
               kitchens, hand-curate every menu, and make sure your order arrives
@@ -49,7 +49,7 @@ const About = () => {
               </Link>
               <button
                 onClick={() => setLikes((l) => l + 1)}
-                className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-5 py-3 text-sm font-semibold text-orange-700 transition hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-md border border-red-200 bg-red-50 px-5 py-3 text-sm font-semibold text-red-700 transition hover:bg-red-100"
               >
                 ❤ Like ({likes})
               </button>
@@ -57,9 +57,7 @@ const About = () => {
           </div>
 
           <div className="relative">
-            <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-orange-200/60 blur-2xl" />
-            <div className="absolute -right-4 -bottom-6 h-40 w-40 rounded-full bg-amber-200/60 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[28px] bg-white shadow-xl ring-1 ring-slate-200">
+            <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200">
               <img
                 src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=70"
                 alt="Plated meal"
@@ -67,7 +65,7 @@ const About = () => {
                 loading="lazy"
               />
               <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-orange-600">
+                <p className="text-xs font-semibold uppercase tracking-wider text-red-600">
                   Our mission
                 </p>
                 <p className="mt-1 text-sm text-slate-600">
@@ -78,7 +76,6 @@ const About = () => {
           </div>
         </div>
 
-        {/* Values */}
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {[
             { title: "Quality first", body: "We taste-test every dish before it hits the menu." },

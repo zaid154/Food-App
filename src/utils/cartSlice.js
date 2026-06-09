@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// load saved cart from localStorage so items are kept after refresh
 const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const cartSlice = createSlice({
@@ -11,8 +10,6 @@ const cartSlice = createSlice({
     },
 
     reducers: {
-
-        // add item (increase quantity if it is already in the cart)
         addCart: (state, action) => {
             const existingItem = state.item.find(
                 (item) => item.id === action.payload.id
@@ -25,7 +22,6 @@ const cartSlice = createSlice({
             }
         },
 
-        // remove item (decrease quantity or remove fully)
         removeCart: (state, action) => {
             const existingItem = state.item.find(
                 (item) => item.id === action.payload
@@ -40,7 +36,6 @@ const cartSlice = createSlice({
             }
         },
 
-        // empty the cart
         clearCart: (state) => {
             state.item = [];
         }

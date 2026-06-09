@@ -128,7 +128,7 @@ const ChatGptModel = () => {
               key={i}
               className={`max-w-lg rounded-2xl px-5 py-3 text-sm shadow-md ${
                 msg.role === "user"
-                  ? "ml-auto bg-gradient-to-r from-orange-600 to-orange-500 text-white"
+                  ? "ml-auto bg-red-600 text-white"
                   : "border border-slate-200 bg-slate-50 text-slate-800"
               }`}
             >
@@ -139,7 +139,7 @@ const ChatGptModel = () => {
 
         <div className="flex gap-3 border-t border-slate-200 p-4">
           <input
-            className="flex-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-60"
+            className="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-60"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t.placeholder}
@@ -153,7 +153,7 @@ const ChatGptModel = () => {
             type="button"
             onClick={sendMessage}
             disabled={loading}
-            className="rounded-xl bg-gradient-to-r from-orange-600 to-orange-500 px-6 py-3 font-semibold text-white transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? "..." : t.send}
           </button>

@@ -12,14 +12,10 @@ const Checkout = () => {
     const location = useLocation();
     const { user } = useContext(UserContext);
 
-    // if the user came here from a "Buy now" button, that product
-    // is passed through router state. otherwise we use the normal cart.
+    // "Buy now" passes a single product via router state, otherwise use the cart
     const buyNowItem = location.state && location.state.buyNowItem;
     const isBuyNow = Boolean(buyNowItem);
 
-    // items shown on this page:
-    //   buy now flow -> only that single product, quantity 1
-    //   normal flow  -> whatever is in the cart
     const items = isBuyNow
         ? [{ ...buyNowItem, quantity: 1 }]
         : cartItems;
@@ -30,7 +26,6 @@ const Checkout = () => {
     const [payment, setPayment] = useState("Cash on Delivery");
     const [error, setError] = useState("");
 
-    // calculate totals from whichever items list we are using
     const totalItems = items.reduce((n, i) => n + (i.quantity || 1), 0);
     const subtotal = items.reduce(
         (sum, item) => sum + (item.caloriesPerServing || 0) * (item.quantity || 1),
@@ -53,7 +48,6 @@ const Checkout = () => {
             return;
         }
 
-        // build a new order object
         const newOrder = {
             id: Date.now(),
             userEmail: user ? user.email : "guest",
@@ -69,8 +63,7 @@ const Checkout = () => {
 
         dispatch(addOrder(newOrder));
 
-        // only empty the cart for a normal checkout.
-        // a "buy now" order should leave the existing cart untouched.
+        // buy now orders shouldn't clear the cart
         if (!isBuyNow) {
             dispatch(clearCart());
         }
@@ -95,17 +88,15 @@ const Checkout = () => {
     }
 
     return (
-        <section className="bg-orange-50 px-4 py-10">
+        <section className="bg-gray-50 px-4 py-10">
             <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.2fr_1fr]">
-
-                {/* delivery form */}
                 <form onSubmit={placeOrder} className="rounded-2xl bg-white p-6 shadow">
                     <div className="flex items-center justify-between">
                         <h1 className="text-2xl font-bold text-slate-900">
                             Delivery Details
                         </h1>
                         {isBuyNow && (
-                            <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-700">
+                            <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">
                                 Buy Now
                             </span>
                         )}
@@ -118,7 +109,7 @@ const Checkout = () => {
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-400"
+                                className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-red-400"
                             />
                         </div>
 
@@ -128,7 +119,7 @@ const Checkout = () => {
                                 type="text"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
-                                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-400"
+                                className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-red-400"
                                 placeholder="10-digit number"
                             />
                         </div>
@@ -139,7 +130,7 @@ const Checkout = () => {
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
                                 rows={3}
-                                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-400"
+                                className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-red-400"
                                 placeholder="House no, street, city"
                             />
                         </div>
@@ -149,7 +140,7 @@ const Checkout = () => {
                             <select
                                 value={payment}
                                 onChange={(e) => setPayment(e.target.value)}
-                                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-400"
+                                className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-red-400"
                             >
                                 <option>Cash on Delivery</option>
                                 <option>UPI</option>
@@ -165,18 +156,17 @@ const Checkout = () => {
 
                         <button
                             type="submit"
-                            className="w-full rounded-full bg-orange-500 px-4 py-3 font-semibold text-white hover:bg-orange-600"
+                            className="w-full rounded-md bg-red-600 px-4 py-3 font-semibold text-white hover:bg-red-700"
                         >
                             Place Order — Rs. {grandTotal}
                         </button>
                     </div>
                 </form>
 
-                {/* order summary */}
                 <aside className="rounded-2xl bg-slate-900 p-6 text-white shadow">
                     <h2 className="text-xl font-bold">Order Summary</h2>
                     {isBuyNow && (
-                        <p className="mt-1 text-xs text-orange-300">
+                        <p className="mt-1 text-xs text-red-300">
                             Buying this item only — your cart is not affected
                         </p>
                     )}
@@ -186,7 +176,7 @@ const Checkout = () => {
                             <li key={item.id} className="flex justify-between border-b border-white/10 pb-2 text-sm">
                                 <span>
                                     {item.name}{" "}
-                                    <span className="text-orange-300">x{item.quantity || 1}</span>
+                                    <span className="text-red-300">x{item.quantity || 1}</span>
                                 </span>
                                 <span>Rs. {(item.caloriesPerServing || 0) * (item.quantity || 1)}</span>
                             </li>

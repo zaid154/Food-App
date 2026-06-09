@@ -48,7 +48,7 @@ const Register = () => {
     };
 
     return (
-        <section className="flex min-h-[80vh] items-center justify-center bg-orange-50 px-4 py-10">
+        <section className="flex min-h-[80vh] items-center justify-center bg-gray-50 px-4 py-10">
             <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
                 <h1 className="text-2xl font-bold text-slate-900">Create Account</h1>
                 <p className="mt-1 text-sm text-slate-500">
@@ -62,7 +62,7 @@ const Register = () => {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-400"
+                            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-red-400"
                             placeholder="Your name"
                         />
                     </div>
@@ -73,7 +73,7 @@ const Register = () => {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-400"
+                            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-red-400"
                             placeholder="you@example.com"
                         />
                     </div>
@@ -84,7 +84,7 @@ const Register = () => {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-400"
+                            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-red-400"
                             placeholder="At least 4 characters"
                         />
                     </div>
@@ -97,7 +97,7 @@ const Register = () => {
 
                     <button
                         type="submit"
-                        className="w-full rounded-lg bg-orange-500 px-4 py-2 font-semibold text-white hover:bg-orange-600"
+                        className="w-full rounded-md bg-red-600 px-4 py-2 font-semibold text-white hover:bg-red-700"
                     >
                         Register
                     </button>
@@ -105,7 +105,7 @@ const Register = () => {
 
                 <p className="mt-4 text-center text-sm text-slate-600">
                     Already have an account?{" "}
-                    <Link to="/login" className="font-semibold text-orange-600">
+                    <Link to="/login" className="font-semibold text-red-600">
                         Login
                     </Link>
                 </p>

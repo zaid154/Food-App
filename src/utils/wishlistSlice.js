@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// load saved wishlist from localStorage so likes survive page refresh
 const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 const wishlistSlice = createSlice({
@@ -11,8 +10,6 @@ const wishlistSlice = createSlice({
     },
 
     reducers: {
-
-        // add a recipe to wishlist if it is not already there
         addWishlist: (state, action) => {
             const exists = state.item.find((i) => i.id === action.payload.id);
             if (!exists) {
@@ -20,7 +17,6 @@ const wishlistSlice = createSlice({
             }
         },
 
-        // remove a recipe from wishlist by id
         removeWishlist: (state, action) => {
             state.item = state.item.filter((i) => i.id !== action.payload);
         },
