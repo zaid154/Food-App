@@ -23,7 +23,7 @@ import ChatGptModel from "./src/Component/ChatGptModel";
 import { createBrowserRouter, RouterProvider, Outlet, useLocation } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./src/utils/Store";
-import "./src/utils/firebase";
+
 
 const Grocery = lazy(() => import("./src/Component/Grocery"));
 
