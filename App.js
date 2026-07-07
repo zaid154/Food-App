@@ -7,7 +7,7 @@ import Cart from "./src/Component/Cart";
 import Footer from "./src/Component/Footer";
 import About from "./src/Component/About";
 import Contact from "./src/Component/Contact";
-import AddToCart from "./src/Component/AddToCart";
+import AddToCart from "./src/Component/addToCart";
 import Error from "./src/Component/Error";
 import ProductView from "./src/Component/ProductView";
 import Shimmer from "./src/Component/Shimmer";
