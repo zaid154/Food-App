@@ -35,7 +35,7 @@ Then open http://localhost:1234
 For the AI chat to work you need a Groq key. Copy `.env.example` to `.env` and put your key in it:
 
 ```
-Gemini_api=your_key_here
+GEMINI_API_KEY=your_key_here
 ```
 
 Get a free key from https://console.groq.com. Don't commit the `.env` file.

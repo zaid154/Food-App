@@ -7,7 +7,7 @@ const translations = {
     send: "Send",
     thinking: "Thinking...",
     noApiKey:
-      "API key missing. Add Gemini_api to your .env file and restart the app.",
+      "API key missing. Add GEMINI_API_KEY to your .env file and restart the app.",
   },
   hi: {
     title: "खाना AI सहायक",
@@ -17,7 +17,7 @@ const translations = {
     send: "भेजें",
     thinking: "सोच रहा हूँ...",
     noApiKey:
-      "API key नहीं मिली। .env में Gemini_api डालें और app दोबारा चलाएँ।",
+      "API key नहीं मिली। .env में GEMINI_API_KEY डालें और app दोबारा चलाएँ।",
   },
   es: {
     title: "Asistente de comida IA",
@@ -27,7 +27,7 @@ const translations = {
     send: "Enviar",
     thinking: "Pensando...",
     noApiKey:
-      "Falta la API key. Añade Gemini_api en .env y reinicia la app.",
+      "Falta la API key. Añade GEMINI_API_KEY en .env y reinicia la app.",
   },
 };
 
