@@ -9,6 +9,24 @@ const client = MY_API
     })
   : null;
 
+// Render Gemini's lightweight markdown (**bold**, *italic*, line breaks) as
+// real React nodes instead of showing the raw ** and * characters.
+const formatMessage = (text) =>
+  text.split("\n").map((line, lineIndex) => (
+    <span key={lineIndex}>
+      {line.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, i) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return <strong key={i}>{part.slice(2, -2)}</strong>;
+        }
+        if (part.startsWith("*") && part.endsWith("*")) {
+          return <em key={i}>{part.slice(1, -1)}</em>;
+        }
+        return part;
+      })}
+      {lineIndex < text.split("\n").length - 1 && <br />}
+    </span>
+  ));
+
 const ChatGptModel = () => {
   const [language, setLanguage] = useState("en");
   const t = translations[language];
@@ -72,6 +90,8 @@ You are YumRun AI, a helpful food and restaurant assistant.
 
 Rules:
 - Answer only food, recipes, restaurants, cooking and ordering related questions.
+- Give a direct, useful answer with concrete suggestions right away.
+- Do NOT keep asking the same clarifying question. If a detail is missing, make a sensible assumption and answer anyway.
 - Keep answers short and friendly.
 
 Conversation:
@@ -81,7 +101,7 @@ User: ${userMessage}
 `;
 
       const response = await client.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-flash-lite-latest",
         contents: prompt,
       });
 
@@ -149,7 +169,7 @@ User: ${userMessage}
                   : "border border-slate-200 bg-slate-50 text-slate-800"
               }`}
             >
-              {msg.text}
+              {msg.role === "user" ? msg.text : formatMessage(msg.text)}
             </div>
           ))}
         </div>

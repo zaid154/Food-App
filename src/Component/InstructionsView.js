@@ -2,27 +2,46 @@ import React from "react";
 
 const InstructionsView = ({ item, index, isOpen, onToggle }) => {
   return (
-    <li
-      className="list-none mb-2 cursor-pointer"
-      onClick={onToggle}
-    >
-      <div
-        className={`flex items-center gap-2 font-semibold p-2 rounded-lg
-        ${isOpen ? "bg-amber-400" : "bg-amber-200"}`}
+    <li className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className={`flex w-full items-center gap-3 px-4 py-3 text-left transition ${
+          isOpen ? "bg-red-50" : "hover:bg-slate-50"
+        }`}
       >
-        <span className="w-6 h-6 rounded-full bg-white text-amber-600 flex items-center justify-center text-xs font-bold">
+        <span
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold transition ${
+            isOpen ? "bg-red-600 text-white" : "bg-slate-100 text-slate-600"
+          }`}
+        >
           {index + 1}
         </span>
 
-        Step {index + 1}
-
-        <span className="ml-auto">
-          {isOpen ? "▲" : "▼"}
+        <span
+          className={`font-semibold ${isOpen ? "text-red-700" : "text-slate-800"}`}
+        >
+          Step {index + 1}
         </span>
-      </div>
+
+        <svg
+          viewBox="0 0 24 24"
+          className={`ml-auto h-4 w-4 shrink-0 text-slate-400 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
 
       {isOpen && (
-        <div className="mt-1 p-3 bg-white rounded text-sm border-l-4 border-amber-400">
+        <div className="border-t border-slate-100 px-4 py-3 pl-14 text-sm leading-relaxed text-slate-600">
           {item}
         </div>
       )}

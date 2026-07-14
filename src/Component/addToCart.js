@@ -18,7 +18,7 @@ const AddToCart = () => {
     if (totalItems === 0) {
         return (
             <section className="flex min-h-[70vh] items-center justify-center bg-gray-50 px-4 py-10">
-                <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-8 text-center">
+                <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
                     <div className="text-5xl">🛒</div>
                     <h1 className="mt-4 text-xl font-bold text-gray-900">
                         Your cart is empty
@@ -67,7 +67,7 @@ const AddToCart = () => {
                         {cartItems.map((item, index) => (
                             <article
                                 key={`${item.id}-${index}`}
-                                className="overflow-hidden rounded-xl border border-gray-200 bg-white"
+                                className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md"
                             >
                                 <div className="flex flex-col gap-4 p-4 md:flex-row">
                                     <div className="h-40 w-full shrink-0 overflow-hidden rounded-lg bg-gray-100 md:h-32 md:w-44">
@@ -90,7 +90,7 @@ const AddToCart = () => {
                                                 </p>
                                             </div>
                                             <p className="whitespace-nowrap text-lg font-bold text-gray-900">
-                                                Rs. {item.caloriesPerServing}
+                                                ₹{item.caloriesPerServing}
                                             </p>
                                         </div>
 
@@ -145,29 +145,29 @@ const AddToCart = () => {
                         ))}
                     </div>
 
-                    <aside className="h-fit rounded-xl border border-gray-200 bg-white p-5">
+                    <aside className="sticky top-24 h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                         <h2 className="text-base font-bold text-gray-900">Bill details</h2>
 
                         <div className="mt-4 space-y-3 text-sm">
                             <div className="flex items-center justify-between text-gray-600">
                                 <span>Item total ({totalItems})</span>
-                                <span>Rs. {totalAmount}</span>
+                                <span>₹{totalAmount}</span>
                             </div>
 
                             <div className="flex items-center justify-between text-gray-600">
                                 <span>Delivery fee</span>
-                                <span>Rs. {deliveryFee}</span>
+                                <span>₹{deliveryFee}</span>
                             </div>
 
                             <div className="flex items-center justify-between text-gray-600">
                                 <span>Taxes</span>
-                                <span>Rs. {taxes}</span>
+                                <span>₹{taxes}</span>
                             </div>
 
                             <div className="border-t border-dashed border-gray-200 pt-3">
                                 <div className="flex items-center justify-between text-base font-bold text-gray-900">
                                     <span>To pay</span>
-                                    <span>Rs. {grandTotal}</span>
+                                    <span>₹{grandTotal}</span>
                                 </div>
                             </div>
                         </div>

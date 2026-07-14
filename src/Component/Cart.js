@@ -52,31 +52,31 @@ const CardHandler = ({ data }) => {
 
   return (
     <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden bg-gray-100">
         <img
           src={image}
           alt={name}
           loading="lazy"
-          className="h-44 w-full object-cover transition duration-500 group-hover:scale-105"
+          className="h-[290px] w-full object-cover object-center transition duration-500 group-hover:scale-105"
         />
 
         <button
           onClick={likeHandler}
           aria-label="Like recipe"
-          className="absolute left-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-lg shadow hover:scale-110"
+          className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-lg shadow transition hover:scale-110"
         >
           {isLiked ? "❤️" : "🤍"}
         </button>
 
-        <span className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-md bg-green-600 px-1.5 py-0.5 text-xs font-bold text-white shadow">
-          {rating} ★
-        </span>
-
         {data.cuisine && (
-          <span className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-[10px] font-semibold text-white">
+          <span className="absolute bottom-2 left-2 rounded-md bg-white/90 px-2 py-1 text-[10px] font-semibold text-gray-800 shadow-sm backdrop-blur">
             {data.cuisine}
           </span>
         )}
+
+        <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-md bg-green-600 px-1.5 py-0.5 text-xs font-bold text-white shadow">
+          {rating} ★
+        </span>
       </div>
 
       <div className="flex flex-1 flex-col gap-2 p-4">
@@ -90,48 +90,57 @@ const CardHandler = ({ data }) => {
         </p>
 
         <div className="mt-2 flex items-center justify-between border-t border-gray-100 pt-3">
-          <span className="text-lg font-bold text-gray-900">
+          <span className="text-xl font-extrabold text-gray-900">
             ₹{caloriesPerServing}
           </span>
-          <span className="text-xs text-gray-400">
+          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-500">
             {ingredients.length} items
           </span>
         </div>
 
-        <div className="mt-3 flex flex-col gap-2">
+        <div className="mt-3">
           {cartQty === 0 ? (
-            <button
-              className="w-full rounded-md border border-red-600 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-50"
-              onClick={(e) => cartHandler(e, data)}
-            >
-              ADD
-            </button>
-          ) : (
-            <div className="flex w-full items-center justify-between rounded-lg border border-green-400 bg-green-50 px-2 py-1">
-              <button
-                onClick={minusHandler}
-                className="h-7 w-7 rounded-md bg-white text-base font-bold text-green-700 shadow-sm hover:bg-green-100"
-              >
-                −
-              </button>
-              <span className="text-xs font-bold text-green-700">
-                In cart · {cartQty}
-              </span>
+            <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={(e) => cartHandler(e, data)}
-                className="h-7 w-7 rounded-md bg-white text-base font-bold text-green-700 shadow-sm hover:bg-green-100"
+                className="rounded-lg border border-red-600 py-2.5 text-sm font-semibold text-red-600 transition hover:bg-red-50"
               >
-                +
+                ADD
+              </button>
+              <button
+                onClick={buyNowHandler}
+                className="rounded-lg bg-red-600 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700"
+              >
+                Buy now
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <div className="flex w-full items-center justify-between rounded-lg border border-green-500 bg-green-50 px-2 py-1.5">
+                <button
+                  onClick={minusHandler}
+                  className="h-8 w-8 rounded-md bg-white text-lg font-bold text-green-700 shadow-sm transition hover:bg-green-100"
+                >
+                  −
+                </button>
+                <span className="text-sm font-bold text-green-700">
+                  {cartQty} in cart
+                </span>
+                <button
+                  onClick={(e) => cartHandler(e, data)}
+                  className="h-8 w-8 rounded-md bg-white text-lg font-bold text-green-700 shadow-sm transition hover:bg-green-100"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                onClick={buyNowHandler}
+                className="w-full rounded-lg bg-red-600 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700"
+              >
+                Buy now
               </button>
             </div>
           )}
-
-          <button
-            onClick={buyNowHandler}
-            className="w-full rounded-md bg-red-600 py-2 text-xs font-semibold text-white transition hover:bg-red-700"
-          >
-            Buy now
-          </button>
         </div>
       </div>
     </div>
@@ -178,7 +187,7 @@ const Card = () => {
   return (
     <section className="bg-white">
       <div className="border-b border-gray-100 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 py-6">
+        <div className="mx-auto max-w-[1600px] px-4 py-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <h1 className="text-xl font-bold text-gray-900 md:text-2xl">
               Order food online
@@ -200,11 +209,15 @@ const Card = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 pt-6">
+      <div className="mx-auto max-w-[1600px] px-4 pt-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-gray-900">
-            {allRecipes.length ? `${products.length} dishes` : "Loading..."}
-          </h2>
+          {allRecipes.length ? (
+            <h2 className="text-lg font-bold text-gray-900">
+              {products.length} dishes
+            </h2>
+          ) : (
+            <div className="skeleton h-6 w-28 rounded-full" />
+          )}
           <div className="flex flex-wrap gap-2">
             {filters.map((f) => (
               <button
@@ -223,7 +236,7 @@ const Card = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 pb-12 pt-6">
+      <div className="mx-auto max-w-[1600px] px-4 pb-12 pt-6">
         {allRecipes.length === 0 ? (
           <Shimmer />
         ) : products.length === 0 ? (
@@ -241,7 +254,7 @@ const Card = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
             {products.map((item) => (
               <Link to={`restaurant/${item.id}`} key={item.id} className="block">
                 <CardWithDifficulty data={item} />

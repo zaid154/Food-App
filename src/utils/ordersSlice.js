@@ -17,6 +17,15 @@ const ordersSlice = createSlice({
             state.list.unshift(action.payload);
         },
 
+        // cancel an order the customer just placed. Only "Placed" orders can be
+        // cancelled; already-cancelled/other statuses are left untouched.
+        cancelOrder: (state, action) => {
+            const order = state.list.find((o) => o.id === action.payload);
+            if (order && order.status === "Placed") {
+                order.status = "Cancelled";
+            }
+        },
+
         // remove all orders (used on logout if needed)
         clearOrders: (state) => {
             state.list = [];
@@ -24,6 +33,6 @@ const ordersSlice = createSlice({
     }
 });
 
-export const { addOrder, clearOrders } = ordersSlice.actions;
+export const { addOrder, cancelOrder, clearOrders } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

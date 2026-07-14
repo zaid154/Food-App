@@ -1,4 +1,5 @@
 import React from "react";
+import { FORMSPREE_ENDPOINT } from "../utils/Constants";
 
 class Contact extends React.Component {
     constructor(props) {
@@ -7,6 +8,7 @@ class Contact extends React.Component {
             data: {},
             form: { email: "", subject: "", message: "" },
             sent: false,
+            sending: false,
             error: ""
         };
     }
@@ -29,9 +31,9 @@ class Contact extends React.Component {
         this.setState({ form: { ...this.state.form, [key]: e.target.value }, sent: false, error: "" });
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const { email, message } = this.state.form;
+        const { email, subject, message } = this.state.form;
         if (!email || !message) {
             this.setState({ error: "Email and message are required." });
             return;
@@ -40,16 +42,43 @@ class Contact extends React.Component {
             this.setState({ error: "Please enter a valid email." });
             return;
         }
-        this.setState({
-            sent: true,
-            error: "",
-            form: { email: "", subject: "", message: "" }
-        });
+        if (!FORMSPREE_ENDPOINT) {
+            this.setState({
+                error: "Contact form is not configured. Add FORMSPREE_ENDPOINT to your .env and restart."
+            });
+            return;
+        }
+
+        this.setState({ sending: true, error: "", sent: false });
+
+        try {
+            const res = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({ email, subject, message })
+            });
+
+            if (res.ok) {
+                this.setState({
+                    sent: true,
+                    sending: false,
+                    form: { email: "", subject: "", message: "" }
+                });
+            } else {
+                const data = await res.json().catch(() => ({}));
+                const msg =
+                    data?.errors?.map((x) => x.message).join(", ") ||
+                    "Couldn't send your message. Please try again.";
+                this.setState({ error: msg, sending: false });
+            }
+        } catch (err) {
+            this.setState({ error: "Network error. Please try again.", sending: false });
+        }
     };
 
     render() {
         const { avatar_url, name, login, bio, html_url } = this.state.data || {};
-        const { form, sent, error } = this.state;
+        const { form, sent, sending, error } = this.state;
 
         return (
             <section className="bg-gray-50">
@@ -154,9 +183,10 @@ class Contact extends React.Component {
 
                         <button
                             type="submit"
-                            className="mt-6 w-full rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
+                            disabled={sending}
+                            className="mt-6 w-full rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                         >
-                            Send message
+                            {sending ? "Sending..." : "Send message"}
                         </button>
                     </form>
                 </div>

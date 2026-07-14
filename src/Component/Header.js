@@ -2,7 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { LOGO } from "./../utils/Constants";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import useOnline from "../utils/useOnline";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../utils/cartSlice";
+import { clearWishlist } from "../utils/wishlistSlice";
 import UserContext from "./Usercontext";
 
 const Header = () => {
@@ -10,6 +12,7 @@ const Header = () => {
   const [dark, setDark] = useState(() => localStorage.getItem("theme") === "dark");
   const status = useOnline();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { user, setUser } = useContext(UserContext);
 
@@ -22,6 +25,10 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("loggedUser");
+    // Cart & wishlist live in shared localStorage keys, so clear them on logout
+    // to stop the next user on this browser from inheriting them.
+    dispatch(clearCart());
+    dispatch(clearWishlist());
     setUser(null);
     navigate("/login");
   };

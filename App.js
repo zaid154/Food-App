@@ -28,15 +28,17 @@ import appStore from "./src/utils/Store";
 const Grocery = lazy(() => import("./src/Component/Grocery"));
 
 let App = () => {
-  const [user, setUser] = useState(null);
-  const location = useLocation();
-
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("loggedUser"));
-    if (saved) {
-      setUser(saved);
+  // Hydrate the user synchronously on the first render. Doing this in an effect
+  // (which runs after paint) let ProtectedRoute see user===null first and bounce
+  // a logged-in user to /login on refresh / direct visit of a protected route.
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("loggedUser")) || null;
+    } catch {
+      return null;
     }
-  }, []);
+  });
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);

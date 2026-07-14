@@ -1,11 +1,25 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { cancelOrder } from "../utils/ordersSlice";
 import UserContext from "./Usercontext";
+
+// badge colour per order status
+const statusStyle = (status) =>
+    status === "Cancelled"
+        ? "bg-red-100 text-red-700"
+        : "bg-green-100 text-green-700";
 
 const Orders = () => {
     const allOrders = useSelector((store) => store.orders.list);
+    const dispatch = useDispatch();
     const { user } = useContext(UserContext);
+
+    const handleCancel = (id) => {
+        if (window.confirm("Cancel this order?")) {
+            dispatch(cancelOrder(id));
+        }
+    };
 
     // only show orders for the logged-in user
     const myOrders = user
@@ -50,7 +64,7 @@ const Orders = () => {
                                     <p className="text-sm text-slate-500">Order #{order.id}</p>
                                     <p className="text-xs text-slate-400">{order.date}</p>
                                 </div>
-                                <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${statusStyle(order.status)}`}>
                                     {order.status}
                                 </span>
                             </div>
@@ -84,6 +98,19 @@ const Orders = () => {
                                 <span>Total</span>
                                 <span>Rs. {order.total}</span>
                             </div>
+
+                            {order.status === "Placed" ? (
+                                <button
+                                    onClick={() => handleCancel(order.id)}
+                                    className="mt-4 w-full rounded-md border border-red-300 bg-white px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-50"
+                                >
+                                    Cancel order
+                                </button>
+                            ) : (
+                                <p className="mt-4 text-center text-sm font-semibold text-red-500">
+                                    This order was cancelled.
+                                </p>
+                            )}
                         </div>
                     ))}
                 </div>
