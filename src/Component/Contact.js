@@ -116,7 +116,7 @@ class Contact extends React.Component {
                         )}
 
                         <ul className="mt-8 space-y-3 text-sm text-slate-200">
-                            <li>📧 hello@yumrun.example</li>
+                            <li>📧 zaidm1323@gmail.com</li>
                             <li>📞 +91 99999 99999</li>
                             <li>📍 Delhi, India</li>
                         </ul>
